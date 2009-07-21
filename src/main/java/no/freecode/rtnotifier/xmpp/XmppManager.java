@@ -18,8 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 
 /**
- * @author Reidar Øksnevad (reidar.oksnevad@freecode.no)
+ * This is the central class that manages communication with the XMPP server.
  * 
+ * @author Reidar Øksnevad (reidar.oksnevad@freecode.no)
  */
 public class XmppManager {
 
