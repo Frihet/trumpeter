@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<assembly>
+	<id>distribution</id>
+	<formats>
+		<!-- <format>tar.gz</format> -->
+		<format>zip</format>
+		<!--		<format>dir</format>-->
+	</formats>
+
+	<includeBaseDirectory>true</includeBaseDirectory>
+
+	<files>
+		<file>
+			<source>src/main/resources/config.properties</source>
+			<outputDirectory>etc</outputDirectory>
+		</file>
+		<file>
+			<source>src/main/resources/agents.xml</source>
+			<outputDirectory>etc</outputDirectory>
+		</file>
+	</files>
+
+	<fileSets>
+		<fileSet>
+			<directory>distribution/package</directory>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>**</include>
+			</includes>
+			<excludes>
+				<exclude>run.sh</exclude>
+			</excludes>
+		</fileSet>
+
+		<fileSet>
+			<directory>distribution/package</directory>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>run.sh</include>
+			</includes>
+			<fileMode>0744</fileMode>
+		</fileSet>
+	</fileSets>
+
+	<dependencySets>
+		<!--		<dependencySet/>-->
+		<dependencySet>
+			<outputDirectory>/lib</outputDirectory>
+			<!--			<scope>compile</scope>-->
+		</dependencySet>
+	</dependencySets>
+</assembly>

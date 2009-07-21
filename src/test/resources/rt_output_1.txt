@@ -1,0 +1,674 @@
+RT/3.6.3 200 Ok
+
+id: ticket/2327
+Queue: fcnoos-div5
+Owner: nooszaegus
+Creator: noosschcar
+Subject: Subject removed
+Status: rejected
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: caroline.schreiner@freecode.no
+Cc:
+AdminCc:
+Created: Tue Jun 09 23:31:37 2009
+Starts: Not set
+Started: Wed Jun 10 10:31:51 2009
+Due: Not set
+Resolved: Wed Jun 10 10:32:29 2009
+Told: Wed Jun 10 10:32:29 2009
+LastUpdated: Wed Jun 10 10:32:29 2009
+TimeEstimated: 0
+TimeWorked: 0
+TimeLeft: 0
+
+--
+
+id: ticket/2235
+Queue: fcnoos-div5
+Owner: noostanann
+Creator: noosisegei
+Subject: Subject removed
+Status: resolved
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: geir.isene@freecode.no
+Cc:
+AdminCc:
+Created: Mon May 18 12:16:39 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Tue Jun 16 12:57:57 2009
+Told: Sun May 24 22:37:34 2009
+LastUpdated: Tue Jun 16 12:57:57 2009
+TimeEstimated: 0
+TimeWorked: 0
+TimeLeft: 0
+
+--
+
+id: ticket/2239
+Queue: fcnoos-div5
+Owner: noosoksrei
+Creator: noosbrelai
+Subject: Subject removed
+Status: resolved
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: laila.breivik@freecode.no
+Cc:
+AdminCc:
+Created: Mon May 18 17:39:48 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Tue May 19 14:29:26 2009
+Told: Tue May 19 12:31:16 2009
+LastUpdated: Tue May 19 14:29:27 2009
+TimeEstimated: 0
+TimeWorked: 45 min
+TimeLeft: 0
+
+--
+
+id: ticket/2335
+Queue: fcnoos-div5
+Owner: noosoksrei
+Creator: nooszaegus
+Subject: Subject removed
+Status: resolved
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: caroline.schreiner@freecode.no
+Cc:
+AdminCc:
+Created: Fri Jun 12 13:44:13 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Sun Jun 14 20:14:00 2009
+Told: Fri Jun 12 14:43:47 2009
+LastUpdated: Mon Jun 15 08:45:00 2009
+TimeEstimated: 0
+TimeWorked: 0
+TimeLeft: 0
+
+--
+
+id: ticket/2238
+Queue: fcnoos-div5
+Owner: noosspikri
+Creator: noosmarbre
+Subject: Subject removed
+Status: resolved
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: brendan.martin@freecode.no
+Cc:
+AdminCc:
+Created: Mon May 18 14:42:54 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Tue May 19 15:34:52 2009
+Told: Tue May 19 14:38:27 2009
+LastUpdated: Tue May 19 15:34:52 2009
+TimeEstimated: 0
+TimeWorked: 15 min
+TimeLeft: 0
+
+--
+
+id: ticket/2328
+Queue: fcnoos-div5
+Owner: nooszaegus
+Creator: noosnascla
+Subject: Subject removed
+Status: stalled
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: caroline.schreiner@freecode.no
+Cc:
+AdminCc:
+Created: Wed Jun 10 09:05:55 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Not set
+Told: Wed Jun 17 11:15:17 2009
+LastUpdated: Wed Jun 17 12:18:54 2009
+TimeEstimated: 0
+TimeWorked: 30 min
+TimeLeft: 0
+
+--
+
+id: ticket/2338
+Queue: fcnoos-div5
+Owner: nooszaegus
+Creator: noosschcar
+Subject: Subject removed
+Status: resolved
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: caroline.schreiner@freecode.no
+Cc:
+AdminCc:
+Created: Fri Jun 12 15:54:50 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Wed Jun 17 11:13:31 2009
+Told: Tue Jun 16 08:16:18 2009
+LastUpdated: Wed Jun 17 11:13:31 2009
+TimeEstimated: 0
+TimeWorked: 15 min
+TimeLeft: 0
+
+--
+
+id: ticket/2354
+Queue: fcnoos-div5
+Owner: noosoksrei
+Creator: noosschcar
+Subject: Subject removed
+Status: resolved
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: caroline.schreiner@freecode.no
+Cc:
+AdminCc:
+Created: Wed Jun 17 16:11:38 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Wed Jun 24 13:05:58 2009
+Told: Wed Jun 24 09:22:11 2009
+LastUpdated: Wed Jun 24 13:05:59 2009
+TimeEstimated: 0
+TimeWorked: 0
+TimeLeft: 0
+
+--
+
+id: ticket/2231
+Queue: fcnoos-div5
+Owner: nooszaegus
+Creator: noosromrub
+Subject: Subject removed
+Status: stalled
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: ruben.romero@freecode.no
+Cc:
+AdminCc:
+Created: Fri May 15 01:43:04 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Not set
+Told: Thu Jun 04 10:46:30 2009
+LastUpdated: Tue Jun 09 21:10:55 2009
+TimeEstimated: 0
+TimeWorked: 0
+TimeLeft: 0
+
+--
+
+id: ticket/2213
+Queue: fcnoos-div5
+Owner: nooszaegus
+Creator: noosbrakim
+Subject: Subject removed
+Status: stalled
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: caroline.schreiner@freecode.no
+Cc:
+AdminCc:
+Created: Wed May 13 14:33:11 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Not set
+Told: Tue Jun 23 17:08:17 2009
+LastUpdated: Tue Jun 23 17:08:17 2009
+TimeEstimated: 0
+TimeWorked: 10 min
+TimeLeft: 0
+
+--
+
+id: ticket/2236
+Queue: fcnoos-div5
+Owner: noosspikri
+Creator: noosisegei
+Subject: Subject removed
+Status: resolved
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: geir.isene@freecode.no
+Cc:
+AdminCc:
+Created: Mon May 18 12:46:44 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Fri Jul 03 10:32:23 2009
+Told: Fri Jul 03 10:28:54 2009
+LastUpdated: Fri Jul 03 10:32:23 2009
+TimeEstimated: 0
+TimeWorked: 15 min
+TimeLeft: 0
+
+--
+
+id: ticket/2368
+Queue: fcnoos-div5
+Owner: noosoksrei
+Creator: noosschcar
+Subject: Subject removed
+Status: resolved
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: caroline.schreiner@freecode.no
+Cc:
+AdminCc:
+Created: Wed Jun 24 09:48:51 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Tue Jun 30 14:33:22 2009
+Told: Tue Jun 30 13:54:41 2009
+LastUpdated: Tue Jun 30 14:33:22 2009
+TimeEstimated: 0
+TimeWorked: 30 min
+TimeLeft: 0
+
+--
+
+id: ticket/2270
+Queue: fcnoos-div5
+Owner: nooszaegus
+Creator: noosromrub
+Subject: Subject removed
+Status: stalled
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: ruben.romero@freecode.no
+Cc:
+AdminCc:
+Created: Wed May 27 11:29:18 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Not set
+Told: Tue Jun 16 08:17:43 2009
+LastUpdated: Tue Jun 16 08:17:43 2009
+TimeEstimated: 0
+TimeWorked: 15 min
+TimeLeft: 0
+
+--
+
+id: ticket/2274
+Queue: fcnoos-div5
+Owner: nooshanpet
+Creator: nooszaegus
+Subject: Subject removed
+Status: resolved
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: gustavo.zaera@freecode.no
+Cc:
+AdminCc:
+Created: Thu May 28 09:03:36 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Tue Jun 16 08:17:13 2009
+Told: Thu May 28 09:21:37 2009
+LastUpdated: Tue Jun 16 08:17:14 2009
+TimeEstimated: 0
+TimeWorked: 0
+TimeLeft: 0
+
+--
+
+id: ticket/2386
+Queue: fcnoos-div5
+Owner: noosoksrei
+Creator: noosschcar
+Subject: Subject removed
+Status: resolved
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: caroline.schreiner@freecode.no
+Cc:
+AdminCc:
+Created: Tue Jun 30 12:40:05 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Tue Jun 30 14:30:51 2009
+Told: Tue Jun 30 14:03:00 2009
+LastUpdated: Tue Jun 30 14:30:51 2009
+TimeEstimated: 0
+TimeWorked: 0
+TimeLeft: 0
+
+--
+
+id: ticket/2387
+Queue: fcnoos-div5
+Owner: noosoksrei
+Creator: noosschcar
+Subject: Subject removed
+Status: resolved
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: caroline.schreiner@freecode.no
+Cc:
+AdminCc:
+Created: Tue Jun 30 12:49:48 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Tue Jun 30 14:22:45 2009
+Told: Tue Jun 30 14:22:45 2009
+LastUpdated: Tue Jun 30 14:22:45 2009
+TimeEstimated: 0
+TimeWorked: 0
+TimeLeft: 0
+
+--
+
+id: ticket/2388
+Queue: fcnoos-div5
+Owner: noosoksrei
+Creator: noosschcar
+Subject: Subject removed
+Status: resolved
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: caroline.schreiner@freecode.no
+Cc:
+AdminCc:
+Created: Tue Jun 30 13:26:21 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Wed Jul 01 10:58:39 2009
+Told: Tue Jun 30 14:59:55 2009
+LastUpdated: Wed Jul 01 10:58:40 2009
+TimeEstimated: 0
+TimeWorked: 0
+TimeLeft: 0
+
+--
+
+id: ticket/2272
+Queue: fcnoos-div5
+Owner: nooszaegus
+Creator: noosromrub
+Subject: Subject removed
+Status: resolved
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: ruben.romero@freecode.no
+Cc:
+AdminCc:
+Created: Wed May 27 12:37:04 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Tue Jun 30 15:14:07 2009
+Told: Tue Jun 16 08:10:50 2009
+LastUpdated: Tue Jun 30 15:14:07 2009
+TimeEstimated: 0
+TimeWorked: 5 min
+TimeLeft: 0
+
+--
+
+id: ticket/2192
+Queue: fcnoos-div5
+Owner: nooszaegus
+Creator: noosromrub
+Subject: Subject removed
+Status: resolved
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: ruben.romero@freecode.no
+Cc:
+AdminCc:
+Created: Mon May 11 12:43:19 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Tue May 12 11:17:38 2009
+Told: Tue May 12 11:17:38 2009
+LastUpdated: Tue May 12 11:17:39 2009
+TimeEstimated: 0
+TimeWorked: 0
+TimeLeft: 0
+
+--
+
+id: ticket/2395
+Queue: fcnoos-div5
+Owner: Nobody
+Creator: nooszaegus
+Subject: Subject removed
+Status: resolved
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: gustavo.zaera@freecode.no
+Cc:
+AdminCc:
+Created: Wed Jul 01 11:28:33 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Thu Jul 02 09:07:53 2009
+Told: Wed Jul 01 11:57:38 2009
+LastUpdated: Thu Jul 02 09:07:54 2009
+TimeEstimated: 0
+TimeWorked: 0
+TimeLeft: 0
+
+--
+
+id: ticket/2053
+Queue: fcnoos-div5
+Owner: nooszaegus
+Creator: noosmolegi
+Subject: Subject removed
+Status: stalled
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: egil.moller@freecode.no
+Cc: eline.stolan@freecode.no
+AdminCc:
+Created: Tue Mar 17 13:35:36 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Not set
+Told: Wed Jun 17 11:20:20 2009
+LastUpdated: Wed Jun 17 11:23:16 2009
+TimeEstimated: 0
+TimeWorked: 10 min
+TimeLeft: 0
+
+--
+
+id: ticket/2374
+Queue: fcnoos-div5
+Owner: noosoksrei
+Creator: noosromrub
+Subject: Subject removed
+Status: resolved
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: ruben.romero@freecode.no
+Cc:
+AdminCc:
+Created: Thu Jun 25 16:54:05 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Thu Jul 02 10:05:52 2009
+Told: Thu Jul 02 09:08:51 2009
+LastUpdated: Thu Jul 02 10:05:53 2009
+TimeEstimated: 0
+TimeWorked: 0
+TimeLeft: 0
+
+--
+
+id: ticket/2315
+Queue: fcnoos-div5
+Owner: noosspikri
+Creator: noosromrub
+Subject: Subject removed
+Status: stalled
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: ruben.romero@freecode.no
+Cc:
+AdminCc:
+Created: Mon Jun 08 15:05:12 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Not set
+Told: Fri Jul 03 10:31:37 2009
+LastUpdated: Fri Jul 03 10:31:44 2009
+TimeEstimated: 0
+TimeWorked: 0
+TimeLeft: 0
+
+--
+
+id: ticket/2201
+Queue: fcnoos-div5
+Owner: nooszaegus
+Creator: noosschcar
+Subject: Subject removed
+Status: resolved
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: caroline.schreiner@freecode.no
+Cc:
+AdminCc:
+Created: Tue May 12 12:30:04 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Thu May 28 11:57:59 2009
+Told: Thu May 28 10:28:03 2009
+LastUpdated: Thu May 28 11:58:00 2009
+TimeEstimated: 0
+TimeWorked: 0
+TimeLeft: 0
+
+--
+
+id: ticket/2269
+Queue: fcnoos-div5
+Owner: nooszaegus
+Creator: noosromrub
+Subject: Subject removed
+Status: stalled
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: ruben.romero@freecode.no
+Cc:
+AdminCc:
+Created: Wed May 27 11:14:24 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Not set
+Told: Tue Jun 16 08:17:59 2009
+LastUpdated: Tue Jun 16 08:17:59 2009
+TimeEstimated: 0
+TimeWorked: 10 min
+TimeLeft: 0
+
+--
+
+id: ticket/2292
+Queue: fcnoos-div5
+Owner: nooszaegus
+Creator: noosromrub
+Subject: Subject removed
+Status: resolved
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: ruben.romero@freecode.no
+Cc:
+AdminCc:
+Created: Wed Jun 03 11:21:14 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Wed Jun 10 10:29:28 2009
+Told: Thu Jun 04 09:45:23 2009
+LastUpdated: Wed Jun 10 10:29:28 2009
+TimeEstimated: 0
+TimeWorked: 45 min
+TimeLeft: 0
+
+--
+
+id: ticket/2262
+Queue: fcnoos-div5
+Owner: noosoksrei
+Creator: noosschcar
+Subject: Subject removed
+Status: resolved
+Priority: 0
+InitialPriority: 0
+FinalPriority: 0
+Requestors: caroline.schreiner@freecode.no
+Cc:
+AdminCc:
+Created: Mon May 25 14:56:22 2009
+Starts: Not set
+Started: Not set
+Due: Not set
+Resolved: Mon Jun 08 13:59:11 2009
+Told: Tue Jun 02 11:12:05 2009
+LastUpdated: Mon Jun 08 13:59:11 2009
+TimeEstimated: 0
+TimeWorked: 2 hours
+TimeLeft: 0

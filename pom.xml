@@ -1,0 +1,216 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>no.freecode.trumpeter</groupId>
+	<artifactId>trumpeter</artifactId>
+	<packaging>jar</packaging>
+	<name>Trumpeter</name>
+        <version>0.2.0-SNAPSHOT</version>
+	<url>https://projects.freecode.no/projects/show/rtnotifier</url>
+
+    <organization>
+        <name>FreeCode AS</name>
+        <url>http://www.freecode.no/</url>
+    </organization>
+
+    <issueManagement>
+        <system>Redmine</system>
+        <url>https://projects.freecode.no/</url>
+    </issueManagement>
+
+
+	<!-- Standard properties. -->
+	<properties>
+		<pom.configfile>config.properties</pom.configfile>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<pom.configfile>config-dev.properties</pom.configfile>
+			</properties>
+		</profile>
+	</profiles>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+
+				<!-- Exclude the following resources from the generated jar-file. -->
+				<excludes>
+					<exclude>**/config.properties</exclude>
+					<exclude>**/config-dev.properties</exclude>
+					<exclude>**/agents.xml</exclude>
+				</excludes>
+			</resource>
+		</resources>
+
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>create-executable-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>distribution/distribution.xml</descriptor>
+							</descriptors>
+							<archive>
+								<manifest>
+									<mainClass>no.freecode.rtnotifier.App</mainClass>
+								</manifest>
+							</archive>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.14</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.igniterealtime</groupId>
+			<artifactId>smack</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.igniterealtime</groupId>
+			<artifactId>smackx</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring</artifactId>
+			<version>2.5.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.4</version>
+		</dependency>
+
+		<!-- Use Quartz for scheduling events. -->
+		<dependency>
+			<groupId>opensymphony</groupId>
+			<artifactId>quartz</artifactId>
+			<version>1.5.2</version>
+		</dependency>
+
+		<!-- JCS - Java Caching System. -->
+		<dependency>
+			<groupId>org.apache.jcs</groupId>
+			<artifactId>jcs</artifactId>
+			<version>1.3</version>
+		</dependency>
+	</dependencies>
+
+    <!-- Generating site reports. -->
+    <reporting>
+        <plugins>
+            <plugin>
+                <artifactId>maven-site-plugin</artifactId>
+                <configuration>
+                    <inputEncoding>UTF-8</inputEncoding>
+                    <outputEncoding>UTF-8</outputEncoding>
+                    <encoding>UTF-8</encoding>
+                    <charset>UTF-8</charset>
+                </configuration>
+            </plugin>
+
+            <!-- Add javadocs to the site. -->
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <docencoding>UTF-8</docencoding>
+                    <encoding>UTF-8</encoding>
+                    <charset>UTF-8</charset>
+                </configuration>
+            </plugin>
+
+            <!-- HTML-version of the code. -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jxr-maven-plugin</artifactId>
+                <configuration>
+                    <outputEncoding>UTF-8</outputEncoding>
+                </configuration>
+            </plugin>
+
+            <!-- Test reports -->
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+
+            <!-- Test coverage report. -->
+            <plugin>
+                <artifactId>maven-clover-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+            </plugin>
+
+            <!-- Display tags like TODO, etc... -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>taglist-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </reporting>
+
+
+	<!--
+		As we have some dependencies that aren't in our regular Maven
+		repositories, we'll use a project folder as a repository as well.
+	-->
+	<repositories>
+		<repository>
+			<id>ProjectRepo</id>
+			<name>Project repository</name>
+			<url>file:///${basedir}/maven2/</url>
+		</repository>
+	</repositories>
+</project>

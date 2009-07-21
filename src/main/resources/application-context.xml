@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+    <context:annotation-config />
+<!--    <context:property-placeholder location="${pom.configfile}" />-->
+    <context:property-placeholder location="config-dev.properties" />
+
+    <import resource="agents.xml" />
+
+    <bean class="org.jivesoftware.smack.XMPPConnection">
+        <constructor-arg value="${xmpp.server}" />
+    </bean>
+
+    <bean class="no.freecode.rtnotifier.Configuration">
+        <property name="rtBaseUrl" value="${rt.baseUrl}" />
+    </bean>
+
+    <bean class="no.freecode.rtnotifier.rt.RtConnection">
+        <property name="username" value="${rt.username}" />
+        <property name="password" value="${rt.password}" />
+    </bean>
+
+    <bean id="manager" class="no.freecode.rtnotifier.xmpp.XmppManager">
+        <property name="username" value="${xmpp.username}" />
+        <property name="password" value="${xmpp.password}" />
+        <property name="resource" value="${xmpp.resource}" />
+        <property name="invokeOnStartup" value="${application.invokeOnStartup}" />
+    </bean>
+
+    <!-- Set up regular RT polling. -->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <bean class="org.springframework.scheduling.quartz.CronTriggerBean">
+                    <property name="jobDetail">
+                        <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+                            <property name="targetObject" ref="manager" />
+                            <property name="targetMethod" value="invokeAgents" />
+                            <property name="concurrent" value="false" />
+                        </bean>
+                    </property>
+
+                    <!-- Invoke at the times defined by a cron expression. -->
+                    <property name="cronExpression" value="${application.checkIntervalCronExpression}" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+</beans>
