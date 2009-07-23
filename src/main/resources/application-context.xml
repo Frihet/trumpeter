@@ -37,6 +37,8 @@
         <property name="password" value="${xmpp.password}" />
         <property name="resource" value="${xmpp.resource}" />
         <property name="invokeOnStartup" value="${application.invokeOnStartup}" />
+        <property name="sendPresence" value="${xmpp.sendPresence}" />
+        <property name="statusMessage" value="${xmpp.statusMessage}" />
     </bean>
 
     <!-- Set up regular RT polling. -->

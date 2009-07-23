@@ -14,6 +14,7 @@ import javax.annotation.PreDestroy;
 
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.packet.Presence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 
@@ -27,7 +28,10 @@ public class XmppManager {
     private String username;
     private String password;
     private String resource;
+    private String statusMessage = "";
+
     private boolean invokeOnStartup;
+    private boolean sendPresence;
 
     private XMPPConnection connection;
     private XmppChatAgent[] agents;
@@ -45,6 +49,11 @@ public class XmppManager {
         connection.connect();
         connection.login(getUsername(), getPassword(), getResource());
         System.out.println("Connected to XMPP server: " + connection.getUser());
+
+        // Send a status message if the user configured it to (default is no).
+        if (isSendPresence()) {
+            connection.sendPacket(new Presence(Presence.Type.available, getStatusMessage(), 0, Presence.Mode.available));
+        }
 
         for (XmppChatAgent agent : getAgents()) {
             agent.joinChat();
@@ -124,5 +133,21 @@ public class XmppManager {
     @Autowired
     public void setConnection(XMPPConnection connection) {
         this.connection = connection;
+    }
+
+    public String getStatusMessage() {
+        return statusMessage;
+    }
+
+    public void setStatusMessage(String statusMessage) {
+        this.statusMessage = statusMessage;
+    }
+
+    public boolean isSendPresence() {
+        return sendPresence;
+    }
+
+    public void setSendPresence(boolean sendPresence) {
+        this.sendPresence = sendPresence;
     }
 }
