@@ -6,6 +6,7 @@
     <packaging>jar</packaging>
     <name>Trumpeter</name>
     <version>0.2.2</version>
+    <description>Trumpeter is a stand-alone server that integrates RT (Request Tracker) with an XMPP chat server (used by Jabber, Pidgin, Google Talk, etc.). It regularly queries RT, and posts notification messages in chat rooms based on a configurable set of rules.</description>
     <url>https://projects.freecode.no/projects/show/trumpeter</url>
 
     <organization>
@@ -102,6 +103,7 @@
             <version>1.2.14</version>
         </dependency>
 
+        <!-- Smack libraries for communicating via XMPP. -->
         <dependency>
             <groupId>org.igniterealtime</groupId>
             <artifactId>smack</artifactId>
@@ -119,12 +121,14 @@
             <version>2.5.6</version>
         </dependency>
 
+        <!-- HTTP client, used to read data from RT. -->
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
             <version>3.1</version>
         </dependency>
 
+        <!-- Useful utilities for e.g. string parsing. -->
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
@@ -143,6 +147,13 @@
             <groupId>org.apache.jcs</groupId>
             <artifactId>jcs</artifactId>
             <version>1.3</version>
+        </dependency>
+
+        <!-- Command line arguments parsing. -->
+        <dependency>
+            <groupId>commons-cli</groupId>
+            <artifactId>commons-cli</artifactId>
+            <version>1.2</version>
         </dependency>
     </dependencies>
 
@@ -201,9 +212,8 @@
         </plugins>
     </reporting>
 
-
     <!--
-        As we have some dependencies that aren't in our regular Maven repositories, we'll use a project folder as a
+        As we have some dependencies that aren't in our regular Maven repositories, we'll use the project folder as a
         repository as well.
     -->
     <repositories>

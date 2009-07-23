@@ -20,14 +20,16 @@
 <!--            <param name="ConversionPattern" value="%d{MM-dd HH:mm:ss,SSS} [%-5p] %c{2} - %m%n" />-->
 <!--        </layout>-->
 <!--    </appender>-->
-    
+
+<!-- 
     <category name="no.freecode" additivity="false">
         <priority value="trace" />
         <appender-ref ref="console" />
     </category>
+ -->    
 
     <root>
-        <priority value="error" />
+        <priority value="fatal" />
         <appender-ref ref="console" />
     </root>
 
