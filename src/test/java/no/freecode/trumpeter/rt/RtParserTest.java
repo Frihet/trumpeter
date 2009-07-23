@@ -1,21 +1,21 @@
 /**
  * Copyright: 2009 FreeCode AS
- * Project: rtnotifier
+ * Project: trumpeter
  * Created: Jul 5, 2009
  *
  * This file is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; version 3.
  */
-package no.freecode.rtnotifier.rt;
+package no.freecode.trumpeter.rt;
 
 import java.io.InputStream;
 import java.util.List;
 
 import junit.framework.TestCase;
 
-import no.freecode.rtnotifier.rt.RtParser;
-import no.freecode.rtnotifier.rt.Ticket;
+import no.freecode.trumpeter.rt.RtParser;
+import no.freecode.trumpeter.rt.Ticket;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 

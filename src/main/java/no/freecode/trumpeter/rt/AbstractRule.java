@@ -1,15 +1,15 @@
 /**
  * Copyright: 2009 FreeCode AS
- * Project: rtnotifier
+ * Project: trumpeter
  * Created: Jul 8, 2009
  *
  * This file is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; version 3.
  */
-package no.freecode.rtnotifier.rt;
+package no.freecode.trumpeter.rt;
 
-import no.freecode.rtnotifier.Configuration;
+import no.freecode.trumpeter.Configuration;
 
 import org.apache.jcs.JCS;
 import org.apache.jcs.access.exception.CacheException;
@@ -43,7 +43,7 @@ public abstract class AbstractRule implements Rule {
 	}
 	
 	/* (non-Javadoc)
-	 * @see no.freecode.rtnotifier.rt.Rule#getMessage(no.freecode.rtnotifier.rt.Ticket)
+	 * @see no.freecode.trumpeter.rt.Rule#getMessage(no.freecode.trumpeter.rt.Ticket)
 	 */
 	public abstract String getMessage(Ticket ticket);
 

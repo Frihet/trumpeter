@@ -23,16 +23,16 @@
         </constructor-arg>
     </bean>
 
-    <bean class="no.freecode.rtnotifier.Configuration">
+    <bean class="no.freecode.trumpeter.Configuration">
         <property name="rtBaseUrl" value="${rt.baseUrl}" />
     </bean>
 
-    <bean class="no.freecode.rtnotifier.rt.RtConnection">
+    <bean class="no.freecode.trumpeter.rt.RtConnection">
         <property name="username" value="${rt.username}" />
         <property name="password" value="${rt.password}" />
     </bean>
 
-    <bean id="manager" class="no.freecode.rtnotifier.xmpp.XmppManager">
+    <bean id="manager" class="no.freecode.trumpeter.xmpp.XmppManager">
         <property name="username" value="${xmpp.username}" />
         <property name="password" value="${xmpp.password}" />
         <property name="resource" value="${xmpp.resource}" />

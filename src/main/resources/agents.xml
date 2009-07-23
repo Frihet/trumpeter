@@ -5,20 +5,19 @@
      - Add all your agents below. They will be loaded by the proper manager. -
      - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-    <bean class="no.freecode.rtnotifier.xmpp.TicketQueryAgent">
-        <property name="alias" value="QA RT agent" />
-        <property name="chatRoom" value="test@conference.jabber.freecodeint.com" />
-<!--        <property name="query" value="Queue='fcnoos-div5' AND Owner='Nobody' AND (Status='new')" />-->
+    <bean class="no.freecode.trumpeter.xmpp.TicketQueryAgent">
+        <property name="alias" value="RT Agent" />
+        <property name="chatRoom" value="test@conference.example.com" />
         <property name="query" value="Owner='Nobody' AND (Status='new')" />
 
         <property name="rules">
-            <bean class="no.freecode.rtnotifier.rt.CreatedDateRule">
+            <bean class="no.freecode.trumpeter.rt.CreatedDateRule">
                 <property name="workdayBeginsAt" value="9" />
                 <property name="workdayEndsAt" value="16" />
                 <property name="maxAgeInHours" value="24" />
                 <property name="workHourWarningInHours" value="2" />
                 <property name="slaWarningComment" value=":-/" />
-                <property name="slaBreachComment" value="Bad Div5 staff! Please handle immediately!! :-(" />
+                <property name="slaBreachComment" value="Please handle this immediately!! :-(" />
             </bean>
         </property>
     </bean>

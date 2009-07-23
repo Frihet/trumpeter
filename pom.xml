@@ -6,7 +6,7 @@
     <packaging>jar</packaging>
     <name>Trumpeter</name>
     <version>0.2.2</version>
-    <url>https://projects.freecode.no/projects/show/rtnotifier</url>
+    <url>https://projects.freecode.no/projects/show/trumpeter</url>
 
     <organization>
         <name>FreeCode AS</name>
@@ -64,7 +64,7 @@
                             </descriptors>
                             <archive>
                                 <manifest>
-                                    <mainClass>no.freecode.rtnotifier.App</mainClass>
+                                    <mainClass>no.freecode.trumpeter.App</mainClass>
                                 </manifest>
                             </archive>
                         </configuration>

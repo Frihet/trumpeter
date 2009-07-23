@@ -1,9 +1,9 @@
-package no.freecode.rtnotifier;
+package no.freecode.trumpeter;
 
 import java.io.IOException;
 import java.util.Properties;
 
-import no.freecode.rtnotifier.xmpp.XmppManager;
+import no.freecode.trumpeter.xmpp.XmppManager;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.support.AbstractApplicationContext;

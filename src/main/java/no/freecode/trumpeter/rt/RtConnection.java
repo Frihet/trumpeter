@@ -1,5 +1,5 @@
 /**
- *  Project: rtnotifier
+ *  Project: trumpeter
  *  Created: Jul 4, 2009
  *  Copyright: 2009, Reidar Øksnevad
  *
@@ -7,14 +7,14 @@
  *  it under the terms of the GNU General Public License as published
  *  by the Free Software Foundation; version 3.
  */
-package no.freecode.rtnotifier.rt;
+package no.freecode.trumpeter.rt;
 
 import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 
-import no.freecode.rtnotifier.Configuration;
+import no.freecode.trumpeter.Configuration;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
@@ -123,14 +123,14 @@ public class RtConnection {
     }
     
 	/* (non-Javadoc)
-	 * @see no.freecode.rtnotifier.Agent#getConfiguration()
+	 * @see no.freecode.trumpeter.Agent#getConfiguration()
 	 */
 	public Configuration getConfiguration() {
 		return this.configuration;
 	}
 
 	/* (non-Javadoc)
-	 * @see no.freecode.rtnotifier.Agent#setConfiguration(no.freecode.rtnotifier.Configuration)
+	 * @see no.freecode.trumpeter.Agent#setConfiguration(no.freecode.trumpeter.Configuration)
 	 */
     @Autowired
 	public void setConfiguration(Configuration configuration) {
