@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
@@ -39,15 +40,25 @@ public abstract class RtParser {
      * 
      * @param stream
      * @return The parsed tickets.
+     * @throws HttpException
      */
-    public static List<Ticket> parseTicketStream(InputStream stream) {
+    public static List<Ticket> parseTicketStream(InputStream stream) throws HttpException {
         ArrayList<Ticket> tickets = new ArrayList<Ticket>();
         
         BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
 
-        String line;
         try {
-            while ((line = reader.readLine()) != null) {
+            String line = reader.readLine();
+            
+            // Check the first line. This is where the RT status is returned.
+            if (line != null) {
+                // TODO: probably need more sofisticated error handling. Should return the specific error message.
+                if (!line.contains("200")) {
+                    throw new HttpException(line);  // TODO: make an RtException instead
+                }
+            }
+            
+            while (line != null) {
                 if (line.startsWith("id: ")) {
                     
                     // Ok, we have the beginning of a ticket. Collect the data.
@@ -65,7 +76,12 @@ public abstract class RtParser {
                         tickets.add(new Ticket(ticketData));
                     }
                 }
+
+                line = reader.readLine();
             }
+
+        } catch (HttpException e) {
+            throw e;
 
         } catch (IOException e) {
             logger.error("Trouble reading ticket data: " + e.getMessage());

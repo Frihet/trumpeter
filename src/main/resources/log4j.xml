@@ -29,6 +29,7 @@
  -->    
 
     <root>
+<!--        <priority value="INFO" />-->
         <priority value="fatal" />
         <appender-ref ref="console" />
     </root>

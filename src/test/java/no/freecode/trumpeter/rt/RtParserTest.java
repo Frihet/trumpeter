@@ -17,6 +17,7 @@ import junit.framework.TestCase;
 import no.freecode.trumpeter.rt.RtParser;
 import no.freecode.trumpeter.rt.Ticket;
 
+import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
 /**
@@ -28,8 +29,9 @@ public class RtParserTest extends TestCase {
 
     /**
      * Try to parse a text file containing standard RT ticket output.
+     * @throws HttpException 
      */
-    public void testParseTicketStream() {
+    public void testParseTicketStream() throws HttpException {
         InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("rt_output_1.txt");
 
         List<Ticket> tickets = RtParser.parseTicketStream(stream);

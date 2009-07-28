@@ -29,7 +29,7 @@ public class App {
         // Create the options
         Options options = new Options();
         options.addOption("h", "help", false, "print this message");
-//        options.addOption("v", "verbose", false, "print a lot more info");
+//        options.addOption("v", "verbose", false, "print more information");
 
         try {
             // Parse the command line arguments.

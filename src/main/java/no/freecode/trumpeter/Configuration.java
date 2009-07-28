@@ -36,7 +36,7 @@ public class Configuration {
 		this.rtBaseUrl = rtBaseUrl;
 	}
 	
-	
+
 	public String getRtViewTicketUrl() {
 		if (this.rtViewTicketUrl == null) {
 			return this.rtBaseUrl + "/Ticket/Display.html?id=";

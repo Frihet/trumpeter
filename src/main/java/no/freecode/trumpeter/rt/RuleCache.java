@@ -37,5 +37,4 @@ public class RuleCache implements Serializable {
 	public void setHandled(Set<String> handled) {
 		this.handled = handled;
 	}
-
 }

@@ -30,6 +30,7 @@
     <bean class="no.freecode.trumpeter.rt.RtConnection">
         <property name="username" value="${rt.username}" />
         <property name="password" value="${rt.password}" />
+        <property name="useBasicAuthentication" value="${rt.useBasicAuthentication}" />
     </bean>
 
     <bean id="manager" class="no.freecode.trumpeter.xmpp.XmppManager">
