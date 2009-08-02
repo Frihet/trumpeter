@@ -1,6 +1,8 @@
 package no.freecode.trumpeter;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Properties;
 
 import no.freecode.trumpeter.xmpp.XmppManager;
@@ -12,6 +14,9 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
 import org.apache.log4j.Logger;
+import org.jivesoftware.smack.XMPPConnection;
+import org.jivesoftware.smack.XMPPException;
+import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.NestedRuntimeException;
@@ -29,6 +34,9 @@ public class App {
         // Create the options
         Options options = new Options();
         options.addOption("h", "help", false, "print this message");
+        options.addOption("d", "debug", false, "bring up a window showing the communication with the XMPP server");
+        options.addOption("g", "greeting", false, "send a greeting message via all agents (reads one line from stdin).");
+
 //        options.addOption("v", "verbose", false, "print more information");
 
         try {
@@ -43,6 +51,19 @@ public class App {
                 formatter.printHelp(getApplicationName(), options);
 
             } else {
+                if (line.hasOption("debug")) {
+                    XMPPConnection.DEBUG_ENABLED = true;
+                }
+                
+                String greeting = null;
+                if (line.hasOption("greeting")) {
+                    try {
+                        greeting = new BufferedReader(new InputStreamReader(System.in)).readLine();
+                    } catch (IOException e) {
+                        System.out.println("Unable to read greeting message from standard input.");
+                    }
+                }
+
                 System.out.println("Starting " + getApplicationName() + "...\n--\n");
 
                 try {
@@ -51,8 +72,18 @@ public class App {
                     // Make sure the application runs the @Destroy methods when exiting.
                     context.registerShutdownHook();
 
-                    // Invoke the agents at once (i.e. check RT queues), if configured:
                     XmppManager manager = (XmppManager) context.getBean("manager");
+                    if (greeting != null) {
+                        manager.setGreeting(greeting);
+                    }
+                    
+                    try {
+                        manager.connect();
+                    } catch (XMPPException e) {
+                        throw new BeanInitializationException("Unable to connect to XMPP server.", e);
+                    }
+
+                    // Invoke the agents at once (i.e. check RT queues):
                     if (manager.isInvokeOnStartup()) {
                         manager.invokeAgents();
                     }

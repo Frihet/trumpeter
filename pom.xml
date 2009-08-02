@@ -5,7 +5,7 @@
     <artifactId>trumpeter</artifactId>
     <packaging>jar</packaging>
     <name>Trumpeter</name>
-    <version>0.2.3</version>
+    <version>0.2.4-SNAPSHOT</version>
     <description>Trumpeter is a stand-alone server that integrates RT (Request Tracker) with an XMPP chat server (used by Jabber, Pidgin, Google Talk, etc.). It regularly queries RT, and posts notification messages in chat rooms based on a configurable set of rules.</description>
     <url>https://projects.freecode.no/projects/show/trumpeter</url>
 
@@ -19,18 +19,29 @@
         <url>https://projects.freecode.no/</url>
     </issueManagement>
 
-
-    <!-- Standard properties. -->
-    <properties>
-        <pom.configfile>config.properties</pom.configfile>
-    </properties>
-
     <profiles>
         <profile>
             <id>dev</id>
-            <properties>
-                <pom.configfile>/tmp/config.properties</pom.configfile>
-            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <!--
+                            If the maven user chooses to use the 'dev' profile, the following folder will also become
+                            part of the class path. I use this to keep my own developer configuration files
+                            (config.properties and agents.xml) outside version control.
+                        -->
+                        <directory>${user.home}/secret/trumpeter_etc</directory>
+                    </resource>
+                </resources>
+            </build>
+
+            <dependencies>
+                <dependency>
+                    <groupId>org.igniterealtime</groupId>
+                    <artifactId>smackx-debug</artifactId>
+                    <version>3.1.0</version>
+                </dependency>
+            </dependencies>
         </profile>
     </profiles>
 
@@ -39,13 +50,6 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
-
-                <!-- Exclude the following resources from the generated jar-file. -->
-                <excludes>
-                    <exclude>**/config.properties</exclude>
-                    <exclude>**/config-dev.properties</exclude>
-                    <exclude>**/agents.xml</exclude>
-                </excludes>
             </resource>
         </resources>
 

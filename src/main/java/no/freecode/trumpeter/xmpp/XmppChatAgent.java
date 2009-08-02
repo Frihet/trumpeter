@@ -20,10 +20,11 @@ import org.jivesoftware.smackx.muc.MultiUserChat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 
-
 /**
+ * Abstract implementation of a basic XMPP agent. Extend this class if you want
+ * to create a new agent that communicates with the XMPP server.
+ * 
  * @author Reidar Øksnevad (reidar.oksnevad@freecode.no)
- *
  */
 public abstract class XmppChatAgent implements Agent {
 
@@ -94,6 +95,8 @@ public abstract class XmppChatAgent implements Agent {
 		} catch (XMPPException e) {
 			logger.error("Error sending message to the chat room.", e);
 			// TODO: reconnect if the connection is lost?
+			
+//			getConnection().connect()
 		}
     }
 

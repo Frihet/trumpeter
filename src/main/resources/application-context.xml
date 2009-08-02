@@ -8,11 +8,8 @@
            http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
     <context:annotation-config />
-    <context:property-placeholder location="${pom.configfile}" />
-<!--    <context:property-placeholder location="file:/tmp/config.properties" />-->
-
+    <context:property-placeholder location="config.properties" />
     <import resource="agents.xml" />
-<!--    <import resource="file:/tmp/agents.xml" />-->
 
     <bean class="org.jivesoftware.smack.XMPPConnection">
         <constructor-arg>

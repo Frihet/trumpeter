@@ -22,7 +22,6 @@ import no.freecode.trumpeter.rt.Ticket;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.log4j.Logger;
 import org.jivesoftware.smack.packet.Message;
-import org.jivesoftware.smackx.XHTMLManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 
@@ -87,16 +86,15 @@ public class TicketQueryAgent extends XmppChatAgent {
             		String ticketMessage = rule.getMessage(ticket);
             		if (ticketMessage != null) {
 						// There is information to publish about this ticket.
-            			Message message = chat.createMessage();
-            			XHTMLManager.addBody(message, ticketMessage.toString());
-            			sendMessage(message);
+            		    Message message = XmppUtils.createChatMessage(chat, ticketMessage);
+                        sendMessage(message);
             		}
             	}
             }
 
         } catch (HttpException e) {
         	logger.error(e);
-        	
+
         } catch (IOException e) {
         	logger.error(e);
         }

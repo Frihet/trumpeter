@@ -9,7 +9,6 @@
  */
 package no.freecode.trumpeter.xmpp;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.jivesoftware.smack.XMPPConnection;
@@ -29,12 +28,14 @@ public class XmppManager {
     private String password;
     private String resource;
     private String statusMessage = "";
+    private String greeting;
 
     private boolean invokeOnStartup;
     private boolean sendPresence;
 
     private XMPPConnection connection;
     private XmppChatAgent[] agents;
+    
 
     
     /**
@@ -44,7 +45,7 @@ public class XmppManager {
      *             if it isn't able to connect, or if there is an error joining
      *             a chat room.
      */
-    @PostConstruct
+//    @PostConstruct
     public void connect() throws XMPPException {
         connection.connect();
         connection.login(getUsername(), getPassword(), getResource());
@@ -58,7 +59,7 @@ public class XmppManager {
         for (XmppChatAgent agent : getAgents()) {
             agent.joinChat();
 
-            String greeting = System.getProperty("greeting");
+            String greeting = getGreeting();
             if (greeting != null) {
             	agent.sendMessage(greeting);
             }
@@ -149,5 +150,13 @@ public class XmppManager {
 
     public void setSendPresence(boolean sendPresence) {
         this.sendPresence = sendPresence;
+    }
+
+    public String getGreeting() {
+        return greeting;
+    }
+
+    public void setGreeting(String greeting) {
+        this.greeting = greeting;
     }
 }

@@ -3,23 +3,12 @@
 <assembly>
 	<id>distribution</id>
 	<formats>
-		<!-- <format>tar.gz</format> -->
+<!--        <format>tar.gz</format> -->
 		<format>zip</format>
 		<!--		<format>dir</format>-->
 	</formats>
 
 	<includeBaseDirectory>true</includeBaseDirectory>
-
-	<files>
-		<file>
-			<source>src/main/resources/config.properties</source>
-			<outputDirectory>etc</outputDirectory>
-		</file>
-		<file>
-			<source>src/main/resources/agents.xml</source>
-			<outputDirectory>etc</outputDirectory>
-		</file>
-	</files>
 
 	<fileSets>
 		<fileSet>
