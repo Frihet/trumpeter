@@ -2,7 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-     - Add all your agents below. They will be loaded by the proper manager. -
+     - Add all your agents as separate beans below. They will all be loaded  -
+     - automatically by the proper manager.                                  -
      - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
     <bean class="no.freecode.trumpeter.xmpp.TicketQueryAgent">
@@ -17,7 +18,7 @@
                 <property name="maxAgeInHours" value="24" />
                 <property name="workHourWarningInHours" value="2" />
                 <property name="slaWarningComment" value=":-/" />
-                <property name="slaBreachComment" value="Please handle this immediately!! :-(" />
+                <property name="slaBreachComment" value="Please handle immediately!! :-(" />
             </bean>
         </property>
     </bean>

@@ -36,10 +36,14 @@ public class RtConnection {
     private static final Logger logger = Logger.getLogger(RtConnection.class);
 
     private Configuration configuration;
+
+    @Autowired
+    private RtParser rtParser;
+
     private String username;
     private String password;
     private boolean useBasicAuthentication;
-
+    
     private HttpClient client;
 
     /**
@@ -105,7 +109,7 @@ public class RtConnection {
             client.executeMethod(get);
 
             // Return the tickets received from RT.
-            return RtParser.parseTicketStream(get.getResponseBodyAsStream());
+            return rtParser.parseTicketStream(get.getResponseBodyAsStream());
 
         } finally {
             // Release resources used by the GET method.

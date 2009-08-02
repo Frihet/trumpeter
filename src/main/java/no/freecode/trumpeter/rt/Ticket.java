@@ -25,16 +25,18 @@ import org.apache.log4j.Logger;
 public class Ticket {
 
     private static final Logger logger = Logger.getLogger(Ticket.class);
-    
+
     private Map<String, String> ticketData;
+    private int hourOffset;
 
     /**
-     * Create  a new ticket based on textual input from the RT REST interface.
+     * Create a new ticket based on textual input from the RT REST interface.
      */
-    public Ticket(Map<String, String> ticketData) {
+    public Ticket(Map<String, String> ticketData, int hourOffset) {
         this.ticketData = ticketData;
+        this.hourOffset = hourOffset;
     }
-
+    
     public String getStringProperty(String key) {
         return this.ticketData.get(key);
     }
@@ -47,7 +49,7 @@ public class Ticket {
     }
 
     /**
-	 * 
+	 * Get the ticket id (ticket number).
 	 */
 	public String getId() {
 		String[] splitId = StringUtils.split(this.ticketData.get("id"), '/');
@@ -64,14 +66,43 @@ public class Ticket {
      *         the date, or if it's not there.
      */
     public Date getCreatedDate() {
-        String createdDateString = this.ticketData.get("Created");
+        return getDate("Created");
+    }
+
+    /**
+     * Helper method to parse RT date strings.
+     */
+    private Date getDate(String key) {
+        String createdDateString = this.ticketData.get(key);
 
         try {
-            return DateUtils.parseDate(createdDateString, new String[] {RtParser.RT_DATE_FORMAT});
-            
+            Date date = DateUtils.parseDate(createdDateString, new String[] {RtParser.RT_DATE_FORMAT});
+
+            if (this.hourOffset == 0) {
+                return date;
+            } else {
+                return DateUtils.addHours(date, this.hourOffset);
+            }
+
         } catch (ParseException e) {
             logger.error("Unable to parse date '" + createdDateString + "'.", e);
             return null;
         }
+    }
+
+    /**
+     * @return the number of hours difference between RT and this instance.
+     */
+    public int getHourOffset() {
+        return hourOffset;
+    }
+
+    /**
+     * Set the number of hours difference between your RT instance and this
+     * server. This is required if the RT is not in the same time zone as this
+     * server, since RT does not return information about its timezone.
+     */
+    public void setHourOffset(int hourOffset) {
+        this.hourOffset = hourOffset;
     }
 }

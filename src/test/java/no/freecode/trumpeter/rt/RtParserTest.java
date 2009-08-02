@@ -14,6 +14,7 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
+import no.freecode.trumpeter.Configuration;
 import no.freecode.trumpeter.rt.RtParser;
 import no.freecode.trumpeter.rt.Ticket;
 
@@ -34,7 +35,9 @@ public class RtParserTest extends TestCase {
     public void testParseTicketStream() throws HttpException {
         InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("rt_output_1.txt");
 
-        List<Ticket> tickets = RtParser.parseTicketStream(stream);
+        RtParser rtParser = new RtParser();
+        rtParser.setConfiguration(new Configuration());
+        List<Ticket> tickets = rtParser.parseTicketStream(stream);
         assertEquals(27, tickets.size());
 
         for (Ticket t : tickets) {

@@ -18,9 +18,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import no.freecode.trumpeter.Configuration;
+
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 
 
 /**
@@ -28,11 +32,13 @@ import org.apache.log4j.Logger;
  * 
  * @author Reidar Øksnevad (reidar.oksnevad@freecode.no)
  */
-public abstract class RtParser {
+public class RtParser {
 
     private static final Logger logger = Logger.getLogger(RtParser.class);
 
     public static final String RT_DATE_FORMAT = "EEE MMM dd HH:mm:ss yyyy";
+    
+    private Configuration configuration;
     
     /**
      * Read textual ticket descriptions from an input stream. The inserted data
@@ -42,7 +48,7 @@ public abstract class RtParser {
      * @return The parsed tickets.
      * @throws HttpException
      */
-    public static List<Ticket> parseTicketStream(InputStream stream) throws HttpException {
+    public List<Ticket> parseTicketStream(InputStream stream) throws HttpException {
         ArrayList<Ticket> tickets = new ArrayList<Ticket>();
         
         BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
@@ -73,7 +79,7 @@ public abstract class RtParser {
                                  (lineData = (line + " ").split(": ", 2)).length == 2);
 
                         // Create a new Ticket based on the data, and add it to the returned list.
-                        tickets.add(new Ticket(ticketData));
+                        tickets.add(new Ticket(ticketData, configuration.getRtHourOffset()));
                     }
                 }
 
@@ -88,5 +94,11 @@ public abstract class RtParser {
         }
         
         return tickets;
+    }
+
+    @Autowired
+    @Required
+    public void setConfiguration(Configuration configuration) {
+        this.configuration = configuration;
     }
 }

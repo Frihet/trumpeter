@@ -25,8 +25,9 @@ public class Configuration {
 	
 	private String rtBaseUrl;
 	private String rtViewTicketUrl;  // may be overridden
+	private int rtHourOffset;
 
-
+	
 	public String getRtBaseUrl() {
 		return rtBaseUrl;
 	}
@@ -54,4 +55,20 @@ public class Configuration {
 	public void setRtViewTicketUrl(String rtViewTicketUrl) {
 		this.rtViewTicketUrl = rtViewTicketUrl;
 	}
+
+    /**
+     * @return the number of hours difference between RT and this server.
+     */
+    public int getRtHourOffset() {
+        return rtHourOffset;
+    }
+
+    /**
+     * Set the number of hours difference between your RT instance and this
+     * server. This is required if the RT is not in the same time zone as this
+     * server, since RT does not return information about its timezone.
+     */
+    public void setRtHourOffset(int rtHourOffset) {
+        this.rtHourOffset = rtHourOffset;
+    }
 }

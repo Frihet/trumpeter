@@ -28,7 +28,9 @@ public class TestCreatedDateRule extends TestCase {
 	public void testGetLastAcceptableDate() throws Exception {
         InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("rt_output_1.txt");
 
-        List<Ticket> tickets = RtParser.parseTicketStream(stream);
+        RtParser rtParser = new RtParser();
+        rtParser.setConfiguration(new Configuration());
+        List<Ticket> tickets = rtParser.parseTicketStream(stream);
         assertEquals(27, tickets.size());
 
         for (Ticket t : tickets) {
@@ -38,9 +40,9 @@ public class TestCreatedDateRule extends TestCase {
 
         assertTrue(tickets.get(0).getCreatedDate().toString().contains("2009"));
         assertEquals("2327", tickets.get(0).getId());
-        
+
         CreatedDateRule rule = new CreatedDateRule();
         rule.configuration = new Configuration();
-        System.out.println(rule.getMessage(tickets.get(0)));
+//        System.out.println(rule.getMessage(tickets.get(0)));
 	}
 }
