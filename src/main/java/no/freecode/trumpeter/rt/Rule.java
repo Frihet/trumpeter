@@ -19,7 +19,7 @@ public interface Rule {
 	/**
 	 * This method does not necessarily return a message. In the normal case, it
 	 * will just return null, but when the Ticket does not pass the implemented
-	 * rule (or there is a warning to be sent out), it will return a message
+	 * rule (or there is information to be sent out), it will return a message
 	 * which can be passed to a user in e.g. Jabber.
 	 * 
 	 * @param ticket An RT ticket.

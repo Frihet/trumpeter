@@ -25,7 +25,7 @@ import org.jivesoftware.smackx.XHTMLText;
  * 
  * @author Reidar Øksnevad (reidar.oksnevad@freecode.no)
  */
-public class CreatedDateRule extends AbstractRule {
+public class CreatedDateRule extends CachingRule {
 
 	private static final Logger logger = Logger.getLogger(CreatedDateRule.class);
 
@@ -33,7 +33,7 @@ public class CreatedDateRule extends AbstractRule {
 	private int workdayEndsAt = 16;
 	private int maxAgeInHours = 24;
 	private int workHourWarningInHours = 2;
-	
+
 	private String slaWarningComment = "";
 	private String slaBreachComment = "Please handle immediately!";
 	
@@ -227,4 +227,9 @@ public class CreatedDateRule extends AbstractRule {
 		xhtmlText.append(ticket.getStringProperty("Subject"));
 		xhtmlText.appendCloseAnchorTag();
 	}
+
+    @Override
+    public String getCacheName() {
+        return "CreatedDate";
+    }
 }

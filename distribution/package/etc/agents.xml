@@ -12,14 +12,21 @@
         <property name="query" value="Owner='Nobody' AND (Status='new')" />
 
         <property name="rules">
-            <bean class="no.freecode.trumpeter.rt.CreatedDateRule">
-                <property name="workdayBeginsAt" value="9" />
-                <property name="workdayEndsAt" value="16" />
-                <property name="maxAgeInHours" value="24" />
-                <property name="workHourWarningInHours" value="2" />
-                <property name="slaWarningComment" value=":-/" />
-                <property name="slaBreachComment" value="Please handle immediately!! :-(" />
-            </bean>
+            <set>
+                <bean class="no.freecode.trumpeter.rt.CreatedDateRule">
+                    <property name="workdayBeginsAt" value="9" />
+                    <property name="workdayEndsAt" value="16" />
+                    <property name="maxAgeInHours" value="24" />
+                    <property name="workHourWarningInHours" value="2" />
+                    <property name="slaWarningComment" value=":-/" />
+                    <property name="slaBreachComment" value="Please handle immediately!! :-(" />
+                </bean>
+
+                
+<!--                <bean class="no.freecode.trumpeter.rt.FollowUpCreatedDateRule">-->
+<!---->
+<!--                </bean>-->
+            </set>
         </property>
     </bean>
 </beans>

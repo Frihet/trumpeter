@@ -26,7 +26,7 @@ public class RuleCache implements Serializable {
 	
 	public RuleCache() { }
 
-	
+
 	public Set<String> getHandled() {
 		if (handled == null) {
 			handled = new TreeSet<String>();

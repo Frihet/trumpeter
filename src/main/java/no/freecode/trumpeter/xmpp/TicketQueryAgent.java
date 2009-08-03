@@ -15,6 +15,9 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
+
+import no.freecode.trumpeter.rt.CachingRule;
 import no.freecode.trumpeter.rt.RtConnection;
 import no.freecode.trumpeter.rt.Rule;
 import no.freecode.trumpeter.rt.Ticket;
@@ -97,6 +100,22 @@ public class TicketQueryAgent extends XmppChatAgent {
 
         } catch (IOException e) {
         	logger.error(e);
+        }
+    }
+
+    @PostConstruct
+    public void updateRuleNamespaces() {
+        if (getRules() != null) {
+            for (Rule r : getRules()) {
+                if (r instanceof CachingRule) {
+                    /* Set the cache name space of all CachingRule objects. Use
+                     * the chat room as a namespace (e.g.
+                     * "test@conference.example.com"). I hope this is a
+                     * sufficiently unique identifier...
+                     */
+                    ((CachingRule) r).setNamespace(getChatRoom());
+                }
+            }
         }
     }
 }
