@@ -21,9 +21,9 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 
  * @author Reidar Øksnevad (reidar.oksnevad@freecode.no)
  */
-public abstract class CachingRule implements Rule {
+public abstract class Cache {
 
-	private static final Logger logger = Logger.getLogger(CachingRule.class);
+	private static final Logger logger = Logger.getLogger(Cache.class);
 
 	@Autowired
 	protected Configuration configuration;
@@ -32,11 +32,6 @@ public abstract class CachingRule implements Rule {
 
     private String cacheRegion;
 
-
-	/* (non-Javadoc)
-	 * @see no.freecode.trumpeter.rt.Rule#getMessage(no.freecode.trumpeter.rt.Ticket)
-	 */
-	public abstract String getMessage(Ticket ticket);
 
     /**
      * This method needs to return a string that identifies the cache that you
@@ -54,7 +49,7 @@ public abstract class CachingRule implements Rule {
 	 * @return
 	 */
 	public RuleCache getRuleCache(Ticket ticket) {
-		RuleCache ruleCache = (RuleCache) this.getCache().get(ticket.getId());
+		RuleCache ruleCache = (RuleCache) getCache().get(ticket.getId());
 		if (ruleCache == null) {
 			ruleCache = new RuleCache();
 		}
@@ -70,7 +65,7 @@ public abstract class CachingRule implements Rule {
 	 */
 	public void saveRuleCache(RuleCache ruleCache, Ticket ticket) {
 		try {
-			this.getCache().put(ticket.getId(), ruleCache);
+		    getCache().put(ticket.getId(), ruleCache);
 		} catch (CacheException e) {
 			logger.fatal("Unable to save to cache.", e);
 		}

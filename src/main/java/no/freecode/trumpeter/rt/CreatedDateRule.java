@@ -25,7 +25,7 @@ import org.jivesoftware.smackx.XHTMLText;
  * 
  * @author Reidar Øksnevad (reidar.oksnevad@freecode.no)
  */
-public class CreatedDateRule extends CachingRule {
+public class CreatedDateRule extends Cache implements Rule {
 
 	private static final Logger logger = Logger.getLogger(CreatedDateRule.class);
 

@@ -17,7 +17,8 @@ import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
-import no.freecode.trumpeter.rt.CachingRule;
+import no.freecode.trumpeter.rt.Cache;
+import no.freecode.trumpeter.rt.Finalizer;
 import no.freecode.trumpeter.rt.RtConnection;
 import no.freecode.trumpeter.rt.Rule;
 import no.freecode.trumpeter.rt.Ticket;
@@ -39,6 +40,7 @@ public class TicketQueryAgent extends XmppChatAgent {
 	
     private String query;
     private Set<Rule> rules;
+    private Set<Finalizer> finalizers;
     private RtConnection rtConnection;
 
     public String getQuery() {
@@ -64,6 +66,14 @@ public class TicketQueryAgent extends XmppChatAgent {
     @Required
     public void setRules(Set<Rule> rules) {
         this.rules = rules;
+    }
+
+    public Set<Finalizer> getFinalizers() {
+        return finalizers;
+    }
+
+    public void setFinalizers(Set<Finalizer> finalizers) {
+        this.finalizers = finalizers;
     }
 
     public RtConnection getRtConnection() {
@@ -95,6 +105,11 @@ public class TicketQueryAgent extends XmppChatAgent {
             	}
             }
 
+            Set<Finalizer> finalizers = getFinalizers();
+            for (Finalizer f : finalizers) {
+                f.run();
+            }
+
         } catch (HttpException e) {
         	logger.error(e);
 
@@ -107,13 +122,26 @@ public class TicketQueryAgent extends XmppChatAgent {
     public void updateRuleNamespaces() {
         if (getRules() != null) {
             for (Rule r : getRules()) {
-                if (r instanceof CachingRule) {
+                if (r instanceof Cache) {
                     /* Set the cache name space of all CachingRule objects. Use
                      * the chat room as a namespace (e.g.
                      * "test@conference.example.com"). I hope this is a
                      * sufficiently unique identifier...
                      */
-                    ((CachingRule) r).setNamespace(getChatRoom());
+                    ((Cache) r).setNamespace(getChatRoom());
+                }
+            }
+        }
+        
+        if (getFinalizers() != null) {
+            for (Finalizer f : getFinalizers()) {
+                if (f instanceof Cache) {
+                    /* Set the cache name space of all CachingRule objects. Use
+                     * the chat room as a namespace (e.g.
+                     * "test@conference.example.com"). I hope this is a
+                     * sufficiently unique identifier...
+                     */
+                    ((Cache) f).setNamespace(getChatRoom());
                 }
             }
         }

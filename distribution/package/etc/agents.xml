@@ -9,8 +9,8 @@
     <bean class="no.freecode.trumpeter.xmpp.TicketQueryAgent">
         <property name="alias" value="RT Agent" />
         <property name="chatRoom" value="test@conference.example.com" />
-        <property name="query" value="Owner='Nobody' AND (Status='new')" />
 
+        <property name="query" value="Owner='Nobody' AND (Status='new')" />
         <property name="rules">
             <set>
                 <bean class="no.freecode.trumpeter.rt.CreatedDateRule">
@@ -22,11 +22,13 @@
                     <property name="slaBreachComment" value="Please handle immediately!! :-(" />
                 </bean>
 
-                
 <!--                <bean class="no.freecode.trumpeter.rt.FollowUpCreatedDateRule">-->
 <!---->
 <!--                </bean>-->
             </set>
         </property>
+        
+        <property name=""></property>
+
     </bean>
 </beans>
