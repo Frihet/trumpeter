@@ -26,7 +26,6 @@ import no.freecode.trumpeter.rt.Ticket;
 
 import org.apache.commons.httpclient.HttpException;
 import org.apache.log4j.Logger;
-import org.jivesoftware.smack.packet.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 
@@ -38,7 +37,7 @@ import org.springframework.beans.factory.annotation.Required;
 public class TicketQueryAgent extends XmppChatAgent {
 
     private static final Logger logger = Logger.getLogger(TicketQueryAgent.class);
-	
+
     private String query;
     private Set<Rule> rules = Collections.emptySet();
     private Set<Finalizer> finalizers = Collections.emptySet();
@@ -97,18 +96,23 @@ public class TicketQueryAgent extends XmppChatAgent {
 
             for (Ticket ticket : tickets) {
             	for (Rule rule : rules) {
-            		String ticketMessage = rule.getMessage(ticket);
-            		if (ticketMessage != null) {
-						// There is information to publish about this ticket.
-            		    Message message = XmppUtils.createChatMessage(chat, ticketMessage);
-                        sendMessage(message);
+            		String message = rule.getMessage(ticket);
+            		if (message != null) {
+						// There is information to publish about this ticket. Send it out.
+                        sendMessage(XmppUtils.createChatMessage(chat, message));
             		}
             	}
             }
 
             Set<Finalizer> finalizers = getFinalizers();
             for (Finalizer f : finalizers) {
-                f.run();
+                List<String> messages = f.getMessages();
+                if (messages != null) {
+                    for (String message : messages) {
+                        // There is information to publish about this ticket. Send it out.
+                        sendMessage(XmppUtils.createChatMessage(chat, message));
+                    }
+                }
             }
 
         } catch (HttpException e) {
@@ -133,7 +137,7 @@ public class TicketQueryAgent extends XmppChatAgent {
                 }
             }
         }
-        
+
         if (getFinalizers() != null) {
             for (Finalizer f : getFinalizers()) {
                 if (f instanceof Cache) {

@@ -11,6 +11,7 @@ package no.freecode.trumpeter.rt;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -98,11 +99,61 @@ public class Ticket {
     }
 
     /**
+     * @return The current ticket status.
+     */
+    public Status getStatus() {
+        return Status.getStatus(ticketData.get("Status"));
+    }
+
+    /**
      * Set the number of hours difference between your RT instance and this
      * server. This is required if the RT is not in the same time zone as this
      * server, since RT does not return information about its timezone.
      */
     public void setHourOffset(int hourOffset) {
         this.hourOffset = hourOffset;
+    }
+    
+
+    public enum Status {
+        STALLED("stalled"),
+        REJECTED("rejected"),
+        RESOLVED("resolved"),
+
+        NEW("new"),
+        OPEN("open"),
+
+        UNKNOWN("unknown"),
+        ;
+
+        private static Status DEFAULT_STATUS = UNKNOWN;
+        private static HashMap<String, Status> idMap = new HashMap<String, Status>();
+        
+        static {
+            for (Status s : Status.values()) {
+                idMap.put(s.id, s);
+            }
+        }
+
+        private String id;
+        
+        private Status(String id) {
+            this.id = id;
+        }
+
+        @Override
+        public String toString() {
+            return id;
+        }
+
+        public static Status getStatus(String id) {
+            Status status = idMap.get(id);
+
+            if (status == null) {
+                return DEFAULT_STATUS;
+            } else {
+                return status;
+            }
+        }
     }
 }

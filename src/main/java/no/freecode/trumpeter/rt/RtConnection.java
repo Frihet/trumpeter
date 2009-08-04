@@ -104,7 +104,7 @@ public class RtConnection {
      */
     public Ticket getTicket(String id) throws HttpException, IOException {
         int intId = NumberUtils.toInt(id); // avoid potential injection issues
-        List<Ticket> tickets = getTicketsImpl("/REST/1.0/ticket/" + intId + "/show");
+        List<Ticket> tickets = getTicketsImpl("/REST/1.0/ticket/" + intId + "/show?a=a");
         if (tickets.size() > 0) {
             return tickets.get(0);
         } else {

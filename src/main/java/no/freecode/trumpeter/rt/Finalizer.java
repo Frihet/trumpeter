@@ -9,6 +9,8 @@
  */
 package no.freecode.trumpeter.rt;
 
+import java.util.List;
+
 /**
  * Interface for all RT finalizers.
  * 
@@ -16,6 +18,6 @@ package no.freecode.trumpeter.rt;
  */
 public interface Finalizer {
 
-    void run();
+    List<String> getMessages();
 
 }
