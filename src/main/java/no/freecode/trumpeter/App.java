@@ -42,8 +42,8 @@ public class App {
         try {
             // Parse the command line arguments.
             CommandLine line = parser.parse(options, args);
-            
-            String[] leftoverArgs = line.getArgs();
+
+//            String[] leftoverArgs = line.getArgs();
 
             if (line.hasOption("help")) {
                 // Generate help statement.

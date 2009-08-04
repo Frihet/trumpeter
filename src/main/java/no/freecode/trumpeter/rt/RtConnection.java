@@ -21,6 +21,7 @@ import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.lang.math.NumberUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,9 +90,37 @@ public class RtConnection {
      * @throws HttpException
      */
     public List<Ticket> getTickets(String query) throws HttpException, IOException {
+        return getTicketsImpl("/REST/1.0/search/ticket?format=l&query=" + query);
+    }
+    
+    /**
+     * Get a single ticket.
+     * 
+     * @param id Ticket id (e.g. "1234").
+     * @return the ticket, or null if it doesn't exist.
+     * 
+     * @throws IOException 
+     * @throws HttpException 
+     */
+    public Ticket getTicket(String id) throws HttpException, IOException {
+        int intId = NumberUtils.toInt(id); // avoid potential injection issues
+        List<Ticket> tickets = getTicketsImpl("/REST/1.0/ticket/" + intId + "/show");
+        if (tickets.size() > 0) {
+            return tickets.get(0);
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+     * @param urlString
+     * @return
+     * @throws HttpException
+     * @throws IOException
+     */
+    private List<Ticket> getTicketsImpl(String urlString) throws HttpException, IOException {
         StringBuilder url = new StringBuilder(getConfiguration().getRtBaseUrl());
-//        url.append("/REST/1.0/search/ticket?format=l&query=" + URLEncoder.encode(query, "utf-8"));
-        url.append("/REST/1.0/search/ticket?format=l&query=" + query);
+        url.append(urlString);
 
         if (!isUseBasicAuthentication()) {
             // If BasicAuth is not used, the username and password has to be included in the URL.

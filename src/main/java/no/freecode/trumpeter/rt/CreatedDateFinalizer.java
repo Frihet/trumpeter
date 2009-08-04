@@ -9,7 +9,10 @@
  */
 package no.freecode.trumpeter.rt;
 
+import java.util.Set;
+
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * A {@link Rule} that examines the creation date of a ticket, and compares it
@@ -21,13 +24,15 @@ public class CreatedDateFinalizer extends Cache implements Finalizer {
 
 	private static final Logger logger = Logger.getLogger(CreatedDateFinalizer.class);
 
-
+	@Autowired
+	private RtConnection rtConnection;
+	
     @Override
     public void run() {
+        Set<String> watchlist = getWatchlist();
         
-        
-        
-        // TODO do something...
+//        rtConnection.getTicket(id)
+        // TODO: continue here...
         
     }
 

@@ -9,6 +9,9 @@
  */
 package no.freecode.trumpeter.rt;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import no.freecode.trumpeter.Configuration;
 
 import org.apache.jcs.JCS;
@@ -49,7 +52,7 @@ public abstract class Cache {
 	 * @return
 	 */
 	public RuleCache getRuleCache(Ticket ticket) {
-		RuleCache ruleCache = (RuleCache) getCache().get(ticket.getId());
+		RuleCache ruleCache = (RuleCache) getCache().get("ticket:" + ticket.getId());
 		if (ruleCache == null) {
 			ruleCache = new RuleCache();
 		}
@@ -65,11 +68,34 @@ public abstract class Cache {
 	 */
 	public void saveRuleCache(RuleCache ruleCache, Ticket ticket) {
 		try {
-		    getCache().put(ticket.getId(), ruleCache);
+		    getCache().put("ticket:" + ticket.getId(), ruleCache);
 		} catch (CacheException e) {
 			logger.fatal("Unable to save to cache.", e);
 		}
 	}
+
+    @SuppressWarnings("unchecked")
+    public Set<String> getWatchlist() {
+        Set<String> watchlist = (Set<String>) getCache().get("watchlist");
+        if (watchlist == null) {
+            watchlist = new HashSet<String>();
+        }
+        return watchlist;
+    }
+
+    public void addToWatchlist(Ticket ticket) {
+        Set<String> watchlist = getWatchlist();
+        watchlist.add(ticket.getId());
+        saveWatchlist(watchlist);
+    }
+
+    public void saveWatchlist(Set<String> watchlist) {
+        try {
+            getCache().put("watchlist", watchlist);
+        } catch (CacheException e) {
+            logger.fatal("Unable to save to cache.", e);
+        }
+    }
 
     /**
      * Set the caching namespace to use. This ensures that no two agents operate

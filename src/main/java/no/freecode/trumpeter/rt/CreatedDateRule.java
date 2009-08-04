@@ -134,7 +134,7 @@ public class CreatedDateRule extends Cache implements Rule {
 	 */
 	@Override
 	public String getMessage(Ticket ticket) {
-		
+
 		Calendar cal = new GregorianCalendar();
 		cal.setTime(ticket.getCreatedDate());
 
@@ -186,6 +186,7 @@ public class CreatedDateRule extends Cache implements Rule {
 			handled.add(SLA_BREACH_SENT);
 			handled.add(SLA_WARNING_SENT);
 			handled.add(NEW_MESSAGE_SENT);
+	        addToWatchlist(ticket);
 
 		} else if (!handled.contains(SLA_WARNING_SENT) && now.after(calculatedWarningTime)) {
 			XHTMLText xhtmlText = new XHTMLText(null, null);
@@ -200,6 +201,7 @@ public class CreatedDateRule extends Cache implements Rule {
 			resultMessage = xhtmlText.toString();
 			handled.add(SLA_WARNING_SENT);
 			handled.add(NEW_MESSAGE_SENT);
+	        addToWatchlist(ticket);
 
 		} else if (!handled.contains(NEW_MESSAGE_SENT)) {
 			XHTMLText xhtmlText = new XHTMLText(null, null);
@@ -209,6 +211,7 @@ public class CreatedDateRule extends Cache implements Rule {
 			appendTicketDescription(xhtmlText, ticket);
 			resultMessage = xhtmlText.toString();
 			handled.add(NEW_MESSAGE_SENT);
+	        addToWatchlist(ticket);
 		}
 
 		// Update cache so that we don't send the same message twice.

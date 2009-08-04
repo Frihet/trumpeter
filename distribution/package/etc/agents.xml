@@ -21,14 +21,14 @@
                     <property name="slaWarningComment" value=":-/" />
                     <property name="slaBreachComment" value="Please handle immediately!! :-(" />
                 </bean>
-
-<!--                <bean class="no.freecode.trumpeter.rt.FollowUpCreatedDateRule">-->
-<!---->
-<!--                </bean>-->
             </set>
         </property>
-        
-        <property name=""></property>
+
+        <property name="finalizers">
+            <set>
+                <bean class="no.freecode.trumpeter.rt.CreatedDateFinalizer" />
+            </set>        
+        </property>
 
     </bean>
 </beans>

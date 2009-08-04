@@ -12,6 +12,7 @@ package no.freecode.trumpeter.xmpp;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -39,8 +40,8 @@ public class TicketQueryAgent extends XmppChatAgent {
     private static final Logger logger = Logger.getLogger(TicketQueryAgent.class);
 	
     private String query;
-    private Set<Rule> rules;
-    private Set<Finalizer> finalizers;
+    private Set<Rule> rules = Collections.emptySet();
+    private Set<Finalizer> finalizers = Collections.emptySet();
     private RtConnection rtConnection;
 
     public String getQuery() {
