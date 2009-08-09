@@ -1,0 +1,2 @@
+Runtime data and things like ticket caching is placed here. Make sure the
+application is able to write to this folder.

@@ -174,6 +174,13 @@
             <artifactId>commons-cli</artifactId>
             <version>1.2</version>
         </dependency>
+        
+        <!-- Use the akuma library for daemonization. -->
+        <dependency>
+            <groupId>com.sun.akuma</groupId>
+            <artifactId>akuma</artifactId>
+            <version>1.1</version>
+        </dependency>
     </dependencies>
 
     <!-- Generating site reports. -->
@@ -231,15 +238,22 @@
         </plugins>
     </reporting>
 
-    <!--
-        As we have some dependencies that aren't in our regular Maven repositories, we'll use the project folder as a
-        repository as well.
-    -->
     <repositories>
         <repository>
+            <!--
+                Since we have dependencies that aren't in the standard Maven repository, we'll use a project folder as a
+                repository as well.
+            -->
             <id>ProjectRepo</id>
             <name>Project repository</name>
             <url>file:///${basedir}/maven2/</url>
+        </repository>
+        
+        <repository>
+            <id>maven2-repository.dev.java.net</id>
+            <name>Java.net Repository for Maven</name>
+            <url>http://download.java.net/maven/2/</url>
+            <layout>default</layout>
         </repository>
     </repositories>
 </project>

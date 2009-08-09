@@ -1,5 +1,7 @@
 package no.freecode.trumpeter;
 
+import static com.sun.akuma.CLibrary.LIBC;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,6 +24,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.NestedRuntimeException;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
+import com.sun.akuma.Daemon;
+
+
 /**
  * RT Agent main startup class.
  */
@@ -29,6 +34,22 @@ public class App {
     private static final Logger logger = Logger.getLogger(App.class);
 
     public static void main(String[] args) throws InterruptedException {
+
+        System.out.println("TEST... current executable: "  + Daemon.getCurrentExecutable());
+
+        Daemon daemon = new Daemon();
+        if (daemon.isDaemonized()) {
+            System.out.println("Daemonizing!!1! PID=" + LIBC.getpid());
+            
+            // Initialize as a daemon using the Akuma library.
+            try {
+                daemon.init();
+
+            } catch (Exception e) {
+                System.err.println("Failed to start as daemon. Error was: " + e.getMessage());
+            }
+        }
+
         CommandLineParser parser = new PosixParser();
 
         // Create the options
@@ -36,6 +57,7 @@ public class App {
         options.addOption("h", "help", false, "print this message");
         options.addOption("d", "debug", false, "bring up a window showing the communication with the XMPP server");
         options.addOption("g", "greeting", false, "send a greeting message via all agents (reads one line from stdin).");
+        options.addOption(null, "daemonize", false, "start as a Unix daemon (only works under Linux, Solaris and Mac OS X)");
 
 //        options.addOption("v", "verbose", false, "print more information");
 
@@ -48,9 +70,21 @@ public class App {
             if (line.hasOption("help")) {
                 // Generate help statement.
                 HelpFormatter formatter = new HelpFormatter();
-                formatter.printHelp(getApplicationName(), options);
+                formatter.printHelp("trumpeter.sh [OPTION]... {run|start|stop}\n", options);
 
             } else {
+                if (line.hasOption("daemonize")) {
+                    if (!daemon.isDaemonized()) {
+                        try {
+                            daemon.daemonize();
+                        } catch (IOException e) {
+                            System.err.println("Failed to start as daemon. Error was: " + e.getMessage());
+                        }
+
+                        System.exit(0);
+                    }
+                }
+
                 if (line.hasOption("debug")) {
                     XMPPConnection.DEBUG_ENABLED = true;
                 }

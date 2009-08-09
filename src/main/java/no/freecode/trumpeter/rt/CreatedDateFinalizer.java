@@ -21,8 +21,9 @@ import org.jivesoftware.smackx.XHTMLText;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * A {@link Rule} that examines the creation date of a ticket, and compares it
- * to a configurable date.
+ * A {@link Finalizer} that examines the tickets that have been stored by
+ * {@link CreatedDateRule}, and generates messages e.g. when they have been
+ * taken or closed.
  * 
  * @author Reidar Øksnevad (reidar.oksnevad@freecode.no)
  */

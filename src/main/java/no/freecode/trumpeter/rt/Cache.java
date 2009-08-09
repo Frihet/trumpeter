@@ -20,7 +20,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * Abstract {@link Rule} meant to be used by rules that are to use caching.
+ * Abstract class meant to be used by rules that are to use caching.
  * 
  * @author Reidar Øksnevad (reidar.oksnevad@freecode.no)
  */

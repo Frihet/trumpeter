@@ -1,0 +1,2 @@
+Application cache folder. Make sure the application is able to write to this
+folder.
