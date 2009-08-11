@@ -3,8 +3,13 @@ package no.freecode.trumpeter;
 import static com.sun.akuma.CLibrary.LIBC;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Properties;
 
 import no.freecode.trumpeter.xmpp.XmppManager;
@@ -31,20 +36,28 @@ import com.sun.akuma.Daemon;
  * RT Agent main startup class.
  */
 public class App {
+    private static final String PID_FILE = "var/trumpeter.pid";
     private static final Logger logger = Logger.getLogger(App.class);
 
+    @SuppressWarnings("unchecked")
     public static void main(String[] args) throws InterruptedException {
-
-        System.out.println("TEST... current executable: "  + Daemon.getCurrentExecutable());
 
         Daemon daemon = new Daemon();
         if (daemon.isDaemonized()) {
-            System.out.println("Daemonizing!!1! PID=" + LIBC.getpid());
-            
             // Initialize as a daemon using the Akuma library.
             try {
-                daemon.init();
+                try {
+                    // Write the process id to a pid file. This is used when calling the stop command later.
+                    FileWriter pidWriter = new FileWriter(PID_FILE);
+                    pidWriter.write(Integer.toString(LIBC.getpid()));
+                    pidWriter.close();
 
+                } catch (IOException e1) {
+                    System.err.println("Unable to write PID file: " + e1.getMessage());
+                }
+
+                daemon.init();
+                
             } catch (Exception e) {
                 System.err.println("Failed to start as daemon. Error was: " + e.getMessage());
             }
@@ -54,10 +67,10 @@ public class App {
 
         // Create the options
         Options options = new Options();
-        options.addOption("h", "help", false, "print this message");
-        options.addOption("d", "debug", false, "bring up a window showing the communication with the XMPP server");
-        options.addOption("g", "greeting", false, "send a greeting message via all agents (reads one line from stdin).");
-        options.addOption(null, "daemonize", false, "start as a Unix daemon (only works under Linux, Solaris and Mac OS X)");
+        options.addOption("h", "help", false, "Print this message.");
+        options.addOption("d", "debug", false, "Bring up a window showing the communication with the XMPP server.");
+        options.addOption("g", "greeting", false, "Send a greeting message via all agents (reads one line from stdin).");
+//        options.addOption(null, "daemonize", false, "Start as a Unix daemon (only works under Linux, Solaris and Mac OS X).");
 
 //        options.addOption("v", "verbose", false, "print more information");
 
@@ -65,24 +78,73 @@ public class App {
             // Parse the command line arguments.
             CommandLine line = parser.parse(options, args);
 
-//            String[] leftoverArgs = line.getArgs();
+            List<String> leftoverArgs = line.getArgList();
 
-            if (line.hasOption("help")) {
+            if (line.hasOption("help") || leftoverArgs.size() == 0) {
                 // Generate help statement.
                 HelpFormatter formatter = new HelpFormatter();
                 formatter.printHelp("trumpeter.sh [OPTION]... {run|start|stop}\n", options);
 
+                System.out.println(
+                        "\n" +
+                        " run              Run the server as a normal application.\n" +
+                        " start            Start the server as a background process.\n" +
+                        " stop             Stop the server.\n" +
+                        "\n");
+
             } else {
-                if (line.hasOption("daemonize")) {
+                if (leftoverArgs.contains("start")) {
+                    File pidFile = new File(PID_FILE);
+                    if (pidFile.exists()) {
+                        // TODO: check the PID, and if it's actually running, print out an error message and exit.
+//                        System.err.println("It seems like trumpeter is already running.");
+                    }
+
+                    System.out.println("Starting " + getApplicationName() + " in the background.");
+
                     if (!daemon.isDaemonized()) {
                         try {
                             daemon.daemonize();
                         } catch (IOException e) {
                             System.err.println("Failed to start as daemon. Error was: " + e.getMessage());
                         }
-
+                        
                         System.exit(0);
                     }
+
+                } else if (leftoverArgs.contains("stop")) {
+                    try {
+                        File pidFile = new File(PID_FILE);
+                        BufferedReader pidReader = new BufferedReader(new FileReader(pidFile));
+
+                        System.out.println("Stopping trumpeter...");
+
+                        // Send KILL signal to the application.
+                        int pid = Integer.parseInt(pidReader.readLine());
+                        int res = LIBC.kill(pid, 3);
+                        
+                        // TODO: check result (seems to be 0 if ok...?).
+//                        System.out.println("Tried to kill process " + pid + ". RESULT: " + res);
+
+                        pidReader.close();
+
+                        // Try to delete the PID file.
+                        boolean success = pidFile.delete();
+//                        if (!success) {
+//                            System.err.println("Unable to delete PID file.");
+//                        }
+
+                    } catch (FileNotFoundException e) {
+                        System.err.println("Cannot stop the application. It does not seem to be running.");
+                        
+                    } catch (NumberFormatException e) {
+                        System.err.println("Unable to parse PID file. Error was: " + e.getMessage());
+
+                    } catch (IOException e) {
+                        System.err.println("Unable to parse PID file. Error was: " + e.getMessage());
+                    }
+
+                    System.exit(0);
                 }
 
                 if (line.hasOption("debug")) {

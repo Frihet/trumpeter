@@ -31,6 +31,9 @@ public class CreatedDateFinalizer extends Cache implements Finalizer {
 
 	private static final Logger logger = Logger.getLogger(CreatedDateFinalizer.class);
 
+	private static final String TAKEN_MESSAGE_SENT = "taken_sent";
+
+	
 	@Autowired
 	private RtConnection rtConnection;
 	
@@ -51,6 +54,9 @@ public class CreatedDateFinalizer extends Cache implements Finalizer {
                 for (String ticketId : watchlist) {
                     Ticket ticket = rtConnection.getTicket(ticketId);
                     if (ticket != null) {
+                        RuleCache ruleCache = getRuleCache(ticket);
+                        Set<String> handled = ruleCache.getHandled();
+                        
                         Status status = ticket.getStatus();
 
                         if (status != Status.NEW && status != Status.OPEN && status != Status.STALLED) {
@@ -68,12 +74,18 @@ public class CreatedDateFinalizer extends Cache implements Finalizer {
 
                             messages.add(xhtmlText.toString());
 
-                            // TODO: use the same type of caching as in
-                            // CreatedDateRule and handle e.g. stalled differently
-                            // (all this needs to be more configurable).
-
                             removeFromWatchlist.add(ticketId); // don't talk about this ticket any more...
+
+                        } else if (!handled.contains(TAKEN_MESSAGE_SENT) && !"Nobody".equals(ticket.getStringProperty("Owner"))) {
+                            XHTMLText xhtmlText = new XHTMLText(null, null);
+                            appendTicketDescription(xhtmlText, ticket);
+                            xhtmlText.append(" was taken by / given to " + ticket.getStringProperty("Owner") + ".");
+                            messages.add(xhtmlText.toString());
+                            handled.add(TAKEN_MESSAGE_SENT);
                         }
+
+                        // Update cache so that we don't send the same message twice.
+                        saveRuleCache(ruleCache, ticket);
 
                     } else {
                         // If there is no ticket with that id, don't do anything

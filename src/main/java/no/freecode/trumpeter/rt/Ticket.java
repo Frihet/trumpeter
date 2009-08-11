@@ -113,7 +113,7 @@ public class Ticket {
     public void setHourOffset(int hourOffset) {
         this.hourOffset = hourOffset;
     }
-    
+
 
     public enum Status {
         STALLED("stalled"),
