@@ -3,7 +3,11 @@
 # Script for running trumpeter on a Unix-like system.
 #
 
+DIRNAME=$(cd $(dirname $0); pwd)
 JAVA_EXEC=$(which java)
+
+
+cd $DIRNAME
 
 # If JAVA_HOME has been set, use the java executable in that folder.
 if [ -n "${JAVA_HOME}" ]; then
@@ -15,5 +19,5 @@ if [ -z "${JAVA_EXEC}" ]; then
 	exit 1
 fi
 
-export LANG=en_US.UTF-8
-${JAVA_EXEC} -cp $(ls -1 lib/* | xargs | sed -e "s/ /:/g"):etc no.freecode.trumpeter.App $@
+## ${JAVA_EXEC} -Djava.encoding=UTF-8 -cp $(ls -1 lib/* | xargs | sed -e "s/ /:/g"):etc no.freecode.trumpeter.App $@
+${JAVA_EXEC} -Djava.encoding=UTF-8 -Djava.ext.dirs=lib:ext no.freecode.trumpeter.App $@

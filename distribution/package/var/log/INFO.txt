@@ -1,0 +1,1 @@
+Application log files are placed in this folder. Make sure it's writable.
