@@ -53,13 +53,13 @@ public class App {
                     pidWriter.close();
 
                 } catch (IOException e1) {
-                    printerr("Unable to write PID file: " + e1.getMessage());
+                    logger.error("Unable to write PID file: " + e1.getMessage());
                 }
 
                 daemon.init();
                 
             } catch (Exception e) {
-                printerr("Failed to start as daemon. Error was: " + e.getMessage());
+                logger.error("Failed to start as daemon. Error was: " + e.getMessage());
             }
         }
 
@@ -69,7 +69,7 @@ public class App {
         Options options = new Options();
         options.addOption("h", "help", false, "Print this message.");
         options.addOption("d", "debug", false, "Bring up a window showing the communication with the XMPP server.");
-        options.addOption("g", "greeting", false, "Send a greeting message via all agents (reads one line from stdin).");
+        options.addOption("g", "greeting", false, "Send a greeting message via all agents (reads from stdin).");
 //        options.addOption(null, "daemonize", false, "Start as a Unix daemon (only works under Linux, Solaris and Mac OS X).");
 
 //        options.addOption("v", "verbose", false, "print more information");
@@ -105,13 +105,13 @@ public class App {
 //                        printerr("It seems like trumpeter is already running.");
                     }
 
-                    println("Starting " + getApplicationName() + " as a background process.");
+                    logger.info("Starting " + getApplicationName() + " as a background process.");
 
                     if (!daemon.isDaemonized()) {
                         try {
                             daemon.daemonize();
                         } catch (IOException e) {
-                            printerr("Failed to start as daemon. Error was: " + e.getMessage());
+                            logger.error("Failed to start as daemon. Error was: " + e.getMessage());
                         }
                         
                         System.exit(0);
@@ -122,7 +122,7 @@ public class App {
                         File pidFile = new File(PID_FILE);
                         BufferedReader pidReader = new BufferedReader(new FileReader(pidFile));
 
-                        println("Stopping trumpeter...");
+                        logger.info("Stopping trumpeter...");
 
                         // Send KILL signal to the application.
                         int pid = Integer.parseInt(pidReader.readLine());
@@ -144,15 +144,20 @@ public class App {
 //                        }
 
                     } catch (FileNotFoundException e) {
-                        printerr("Cannot stop the application. It does not seem to be running.");
+                        logger.error("Cannot stop the application. It does not seem to be running.");
                         
                     } catch (NumberFormatException e) {
-                        printerr("Unable to parse PID file. Error was: " + e.getMessage());
+                        logger.error("Unable to parse PID file. Error was: " + e.getMessage());
 
                     } catch (IOException e) {
-                        printerr("Unable to parse PID file. Error was: " + e.getMessage());
+                        logger.error("Unable to parse PID file. Error was: " + e.getMessage());
                     }
 
+                    System.exit(0);
+                
+                } else if (leftoverArgs.contains("run")) {
+                    
+                } else {
                     System.exit(0);
                 }
 
@@ -163,9 +168,14 @@ public class App {
                 String greeting = null;
                 if (line.hasOption("greeting")) {
                     try {
-                        greeting = new BufferedReader(new InputStreamReader(System.in)).readLine();
+                        BufferedReader greetingReader = new BufferedReader(new InputStreamReader(System.in));
+                        String lineIn;
+                        while ((lineIn = greetingReader.readLine()) != null) {
+                            greeting += lineIn + "\n";
+                        }
+                        
                     } catch (IOException e) {
-                        println("Unable to read greeting message from standard input.");
+                        logger.error("Unable to read greeting message from standard input.");
                     }
                 }
 
@@ -194,24 +204,13 @@ public class App {
                     }
 
                 } catch (NestedRuntimeException e) {
-                    printerr("Error: " + e.getMostSpecificCause().getMessage());
-                    logger.error("Error: " + e.getMostSpecificCause().getMessage(), e);
+                    logger.error("Error: " + e.getMostSpecificCause().getMessage());
                 }
             }
 
         } catch (ParseException exp) {
-            println("Unexpected exception: " + exp.getMessage());
+            logger.error("Unexpected exception: " + exp.getMessage());
         }
-    }
-
-    public static void println(String line) {
-        System.out.println(line);
-        logger.info(line);
-    }
-
-    public static void printerr(String line) {
-        System.err.println(line);
-        logger.error(line);
     }
     
     private static String getApplicationName() {
@@ -220,7 +219,7 @@ public class App {
             return props.getProperty("application.name") + " v. " + props.getProperty("application.version");
 
         } catch (IOException e) {
-            printerr("Error! Unable to load application.properties. (" + e.getMessage() + ").");
+            logger.error("Error! Unable to load application.properties. (" + e.getMessage() + ").");
             return "APP NAME / VERSION";
         }
     }

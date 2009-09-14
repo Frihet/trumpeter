@@ -32,13 +32,16 @@ public class XmppManager {
     private String password;
     private String resource;
     private String statusMessage = "";
+    
     private String greeting;
+    private boolean hasSentGreeting;
 
     private boolean invokeOnStartup;
     private boolean sendPresence;
 
     private XMPPConnection connection;
     private XmppChatAgent[] agents;
+
     
 
     /**
@@ -109,8 +112,9 @@ public class XmppManager {
             agent.joinChat();
 
             String greeting = getGreeting();
-            if (greeting != null) {
+            if (greeting != null && !hasSentGreeting) {
                 agent.sendMessage(greeting);
+                hasSentGreeting = true;
             }
         }
     }
