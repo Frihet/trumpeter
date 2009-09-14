@@ -19,16 +19,19 @@
                     <property name="maxAgeInHours" value="24" />
                     <property name="workHourWarningInHours" value="2" />
                     <property name="slaWarningComment" value=":-/" />
-                    <property name="slaBreachComment" value="Please handle immediately!! :-(" />
+                    <property name="slaBreachComment" value="Please handle immediately!" />
                 </bean>
             </set>
         </property>
 
-        <property name="finalizers">
-            <set>
-                <bean class="no.freecode.trumpeter.rt.CreatedDateFinalizer" />
-            </set>        
-        </property>
+        <!-- Finalizers are a bit experimental, and are likely to be replaced with something else. ->
+        <!-- 
+            <property name="finalizers">
+                <set>
+                    <bean class="no.freecode.trumpeter.rt.CreatedDateFinalizer" />
+                </set>        
+            </property>
+        -->
 
     </bean>
 </beans>

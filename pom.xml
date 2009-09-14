@@ -5,7 +5,7 @@
     <artifactId>trumpeter</artifactId>
     <packaging>jar</packaging>
     <name>Trumpeter</name>
-    <version>0.3.0-SNAPSHOT</version>
+    <version>0.3.0</version>
     <description>Trumpeter is a stand-alone server that integrates RT (Request Tracker) with an XMPP chat server (used by Jabber, Pidgin, Google Talk, etc.). It regularly queries RT, and posts notification messages in chat rooms based on a configurable set of rules.</description>
     <url>https://projects.freecode.no/projects/show/trumpeter</url>
 
@@ -70,8 +70,12 @@
                             <archive>
                                 <manifest>
                                     <mainClass>no.freecode.trumpeter.App</mainClass>
+<!--                                    <addClasspath>true</addClasspath>-->
+<!--                                    <classpathPrefix>lib/</classpathPrefix>-->
                                 </manifest>
                             </archive>
+                            
+
                         </configuration>
                     </execution>
                 </executions>
@@ -174,7 +178,7 @@
             <artifactId>commons-cli</artifactId>
             <version>1.2</version>
         </dependency>
-        
+
         <!-- Use the akuma library for daemonization. -->
         <dependency>
             <groupId>com.sun.akuma</groupId>
@@ -248,7 +252,7 @@
             <name>Project repository</name>
             <url>file:///${basedir}/maven2/</url>
         </repository>
-        
+
         <repository>
             <id>maven2-repository.dev.java.net</id>
             <name>Java.net Repository for Maven</name>

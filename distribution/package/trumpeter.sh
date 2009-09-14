@@ -19,5 +19,5 @@ if [ -z "${JAVA_EXEC}" ]; then
 	exit 1
 fi
 
-## ${JAVA_EXEC} -Djava.encoding=UTF-8 -cp $(ls -1 lib/* | xargs | sed -e "s/ /:/g"):etc no.freecode.trumpeter.App $@
-${JAVA_EXEC} -Djava.encoding=UTF-8 -Djava.ext.dirs=lib:ext no.freecode.trumpeter.App $@
+${JAVA_EXEC} -Djava.encoding=UTF-8 -cp $(ls -1 lib/* | xargs | sed -e "s/ /:/g"):etc no.freecode.trumpeter.App $@
+## ${JAVA_EXEC} -Djava.encoding=UTF-8 -Djava.ext.dirs=lib:ext no.freecode.trumpeter.App $@

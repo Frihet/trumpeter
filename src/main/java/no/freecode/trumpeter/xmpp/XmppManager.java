@@ -11,6 +11,8 @@ package no.freecode.trumpeter.xmpp;
 
 import javax.annotation.PreDestroy;
 
+import org.apache.log4j.Logger;
+import org.jivesoftware.smack.ConnectionListener;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Presence;
@@ -24,6 +26,8 @@ import org.springframework.beans.factory.annotation.Required;
  */
 public class XmppManager {
 
+    private static final Logger logger = Logger.getLogger(XmppManager.class);
+    
     private String username;
     private String password;
     private String resource;
@@ -37,7 +41,6 @@ public class XmppManager {
     private XmppChatAgent[] agents;
     
 
-    
     /**
      * Connect to an XMPP (Jabber) server.
      * 
@@ -45,31 +48,71 @@ public class XmppManager {
      *             if it isn't able to connect, or if there is an error joining
      *             a chat room.
      */
-//    @PostConstruct
     public void connect() throws XMPPException {
         connection.connect();
-        connection.login(getUsername(), getPassword(), getResource());
-        System.out.println("Connected to XMPP server: " + connection.getUser());
 
-        // Send a status message if the user configured it to (default is no).
-        if (isSendPresence()) {
-            connection.sendPacket(new Presence(Presence.Type.available, getStatusMessage(), 0, Presence.Mode.available));
-        }
-
-        for (XmppChatAgent agent : getAgents()) {
-            agent.joinChat();
-
-            String greeting = getGreeting();
-            if (greeting != null) {
-            	agent.sendMessage(greeting);
+        prepareChatAgent();
+        
+        connection.addConnectionListener(new ConnectionListener() {
+            
+            @Override
+            public void reconnectionSuccessful() {
+                logger.info("Successfully reconnected to the XMPP server.");
+                try {
+                    // Log on and rejoin the chats if the connection is lost.
+                    prepareChatAgent();
+                    
+                } catch (XMPPException e) {
+                    logger.error("Error preparing chat agent: " + e.getMessage());
+                }
             }
-        }
+            
+            @Override
+            public void reconnectionFailed(Exception arg0) {
+                logger.info("Failed to reconnect to the XMPP server.");
+            }
+
+            @Override
+            public void reconnectingIn(int seconds) {
+                // logger.info("Reconnecting in " + seconds + " seconds.");
+            }
+
+            @Override
+            public void connectionClosedOnError(Exception arg0) {
+                logger.error("Connection to XMPP server was lost.");
+            }
+            
+            @Override
+            public void connectionClosed() {
+                logger.info("XMPP connection was closed.");
+            }
+        });
     }
 
     @PreDestroy
     public void disconnect() {
         System.out.println("Disconnecting.");
         this.connection.disconnect();
+    }
+    
+    private void prepareChatAgent() throws XMPPException {
+        connection.login(getUsername(), getPassword(), getResource());
+        logger.info("Connected to XMPP server: " + connection.getUser());
+        
+        // Send a status message if the user configured it to (default is no).
+        if (isSendPresence()) {
+            connection.sendPacket(new Presence(Presence.Type.available, getStatusMessage(), 0, Presence.Mode.available));
+        }
+
+        // Join chats.
+        for (XmppChatAgent agent : getAgents()) {
+            agent.joinChat();
+
+            String greeting = getGreeting();
+            if (greeting != null) {
+                agent.sendMessage(greeting);
+            }
+        }
     }
 
     /**

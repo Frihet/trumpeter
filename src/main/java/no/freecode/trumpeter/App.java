@@ -41,7 +41,7 @@ public class App {
 
     @SuppressWarnings("unchecked")
     public static void main(String[] args) throws InterruptedException {
-
+        
         Daemon daemon = new Daemon();
         if (daemon.isDaemonized()) {
             // Initialize as a daemon using the Akuma library.
@@ -92,7 +92,7 @@ public class App {
                         " run             Run the server as a normal application.\n" +
                         " start           Start the server as a background process (only works on Linux,\n" +
                         "                 Solaris and Mac OS X).\n" +
-                        " status          Print the current status of the application.\n" +
+//                        " status          Print the current status of the application.\n" +
                         " stop            Stop the server.\n" +
                         "\n");
 
@@ -169,8 +169,7 @@ public class App {
                     }
                 }
 
-                logger.info("Starting " + getApplicationName());
-                System.out.println("Starting " + getApplicationName() + "...\n--\n");
+                logger.info("Starting " + getApplicationName() + "...\n--\n");
 
                 try {
                     AbstractApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
