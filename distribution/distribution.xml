@@ -1,42 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <assembly>
-	<id>distribution</id>
-	<formats>
-<!--        <format>tar.gz</format> -->
-		<format>zip</format>
-		<!--		<format>dir</format>-->
-	</formats>
+    <id>distribution</id>
+    <formats>
+        <!--        <format>tar.gz</format> -->
+<!--        <format>zip</format>-->
+        <format>dir</format>
+    </formats>
 
-	<includeBaseDirectory>true</includeBaseDirectory>
+    <includeBaseDirectory>true</includeBaseDirectory>
 
-	<fileSets>
-		<fileSet>
-			<directory>distribution/package</directory>
-			<outputDirectory>/</outputDirectory>
-			<includes>
-				<include>**</include>
-			</includes>
-			<excludes>
-				<exclude>trumpeter.sh</exclude>
-			</excludes>
-		</fileSet>
+    <fileSets>
+        <fileSet>
+            <directory></directory>
+            <outputDirectory>/source</outputDirectory>
+            <excludes>
+                <exclude>target/**</exclude>
+<!--                <exclude>maven2/**</exclude>-->
+                <exclude>var/**</exclude>
+                <exclude>.*/**</exclude>
+            </excludes>
+        </fileSet>
 
-		<fileSet>
-			<directory>distribution/package</directory>
-			<outputDirectory>/</outputDirectory>
-			<includes>
-				<include>trumpeter.sh</include>
-			</includes>
-			<fileMode>0744</fileMode>
-		</fileSet>
-	</fileSets>
+        <fileSet>
+            <directory>distribution/package</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>**</include>
+            </includes>
+            <excludes>
+                <exclude>trumpeter.sh</exclude>
+            </excludes>
+        </fileSet>
 
-	<dependencySets>
-		<!--		<dependencySet/>-->
-		<dependencySet>
-			<outputDirectory>/lib</outputDirectory>
-			<!--			<scope>compile</scope>-->
-		</dependencySet>
-	</dependencySets>
+        <fileSet>
+            <directory>distribution/package</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>trumpeter.sh</include>
+            </includes>
+            <fileMode>0744</fileMode>
+        </fileSet>
+
+
+    </fileSets>
+
+    <!--    <moduleSets>-->
+    <!--    -->
+    <!--        <moduleSet>-->
+    <!--            <includes>-->
+    <!--                <include>no.freecode.trumpeter:trumpeter</include>-->
+    <!--            </includes>-->
+    <!--            <sources>-->
+    <!--                <outputDirectory>sources/${artifactId}</outputDirectory>-->
+    <!--            </sources>-->
+    <!--        </moduleSet>-->
+    <!--    </moduleSets>-->
+
+    <!--  <moduleSets>-->
+    <!--    <moduleSet>-->
+    <!--      <includeSubModules>false</includeSubModules>-->
+    <!--      <sources>-->
+    <!--        <outputDirectoryMapping>-->
+    <!--          ${module.basedir.name}-->
+    <!--        </outputDirectoryMapping>-->
+    <!--        <excludeSubModuleDirectories>-->
+    <!--          false-->
+    <!--        </excludeSubModuleDirectories>-->
+    <!--        <fileSets>-->
+    <!--          <fileSet>-->
+    <!--            <directory>/</directory>-->
+    <!--            <excludes>-->
+    <!--              <exclude>**/target</exclude>-->
+    <!--            </excludes>-->
+    <!--          </fileSet>-->
+    <!--        </fileSets>-->
+    <!--      </sources>-->
+    <!--    </moduleSet>-->
+    <!--  </moduleSets>-->
+
+
+    <dependencySets>
+        <!--		<dependencySet/>-->
+        <dependencySet>
+            <outputDirectory>/lib</outputDirectory>
+            <!--			<scope>compile</scope>-->
+        </dependencySet>
+    </dependencySets>
 </assembly>
