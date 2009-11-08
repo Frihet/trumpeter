@@ -19,6 +19,10 @@
         <url>https://projects.freecode.no/</url>
     </issueManagement>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <profiles>
         <profile>
             <id>dev</id>
@@ -56,6 +60,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.2-beta-3</version>
                 <executions>
                     <execution>
                         <id>create-executable-jar</id>
@@ -243,14 +248,15 @@
     </reporting>
 
     <repositories>
+        <!--
+            Since we have dependencies that aren't in the standard Maven repository, we'll use a project folder as a
+            repository as well.
+        -->
         <repository>
-            <!--
-                Since we have dependencies that aren't in the standard Maven repository, we'll use a project folder as a
-                repository as well.
-            -->
             <id>ProjectRepo</id>
             <name>Project repository</name>
             <url>file:///${basedir}/maven2/</url>
+            <layout>default</layout>
         </repository>
 
         <repository>

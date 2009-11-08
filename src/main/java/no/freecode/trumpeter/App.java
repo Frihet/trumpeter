@@ -12,8 +12,6 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Properties;
 
-import javax.swing.JOptionPane;
-
 import no.freecode.trumpeter.xmpp.XmppManager;
 
 import org.apache.commons.cli.CommandLine;
