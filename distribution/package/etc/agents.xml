@@ -7,7 +7,7 @@
      - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
     <bean class="no.freecode.trumpeter.xmpp.TicketQueryAgent">
-        <property name="alias" value="RT Agent" />
+        <property name="alias" value="Trumpeter" />
         <property name="chatRoom" value="test@conference.example.com" />
 
         <property name="query" value="Owner='Nobody' AND (Status='new')" />
@@ -24,7 +24,7 @@
             </set>
         </property>
 
-        <!-- Finalizers are a bit experimental, and are likely to be replaced with something else. ->
+        <!-- Finalizers are a bit experimental, and are likely to be replaced with something else. -->
         <!-- 
             <property name="finalizers">
                 <set>

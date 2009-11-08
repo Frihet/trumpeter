@@ -23,7 +23,8 @@ import org.apache.commons.cli.PosixParser;
 import org.apache.log4j.Logger;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
-import org.springframework.beans.factory.BeanInitializationException;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.NestedRuntimeException;
@@ -191,17 +192,25 @@ public class App {
                     if (greeting != null) {
                         manager.setGreeting(greeting);
                     }
-                    
+
                     try {
                         manager.connect();
                     } catch (XMPPException e) {
-                        throw new BeanInitializationException("Unable to connect to XMPP server.", e);
+                        throw new BeanCreationException("Error: " + e.getXMPPError());
+//                        throw new TrumpeterException("Unable to connect to XMPP server. " + e.getXMPPError());
+//                        throw new TrumpeterException("Unable to connect to XMPP server. " + e.getMessage());
                     }
 
                     // Invoke the agents at once (i.e. check RT queues):
                     if (manager.isInvokeOnStartup()) {
                         manager.invokeAgents();
                     }
+
+//                } catch (TrumpeterException e) {
+//                    logger.error("Error: " + e.getMessage());
+
+                } catch (BeansException e) {
+                    logger.error("Error: " + e.getMessage());
 
                 } catch (NestedRuntimeException e) {
                     logger.error("Error: " + e.getMostSpecificCause().getMessage());

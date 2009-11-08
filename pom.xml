@@ -184,11 +184,11 @@
             <version>1.2</version>
         </dependency>
 
-        <!-- Use the akuma library for daemonization. -->
+        <!-- Use the akuma library for daemonization. (https://akuma.dev.java.net/) -->
         <dependency>
             <groupId>com.sun.akuma</groupId>
             <artifactId>akuma</artifactId>
-            <version>1.1</version>
+            <version>1.2</version>
         </dependency>
     </dependencies>
 
@@ -255,8 +255,7 @@
         <repository>
             <id>ProjectRepo</id>
             <name>Project repository</name>
-            <url>file:///${basedir}/maven2/</url>
-            <layout>default</layout>
+            <url>file:///${basedir}/maven2</url>
         </repository>
 
         <repository>
