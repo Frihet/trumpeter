@@ -12,7 +12,6 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Properties;
 
-import no.freecode.trumpeter.rt.Cache;
 import no.freecode.trumpeter.xmpp.XmppManager;
 
 import org.apache.commons.cli.CommandLine;
@@ -43,8 +42,9 @@ public class App {
 
     @SuppressWarnings("unchecked")
     public static void main(String[] args) throws InterruptedException {
-        
-        String userDir = System.getProperty("user.dir");  // current folder
+
+//        String userDir = System.getProperty("user.dir");  // current folder
+        Properties systemProperties = new Properties((Properties) System.getProperties().clone());
 
         Daemon daemon = new Daemon();
         if (daemon.isDaemonized()) {
@@ -61,6 +61,7 @@ public class App {
                 }
 
                 daemon.init();
+                System.setProperties(systemProperties);
                 
             } catch (Exception e) {
                 logger.error("Failed to start as daemon. Error was: " + e.getMessage());
@@ -184,9 +185,9 @@ public class App {
                 }
 
                 logger.info("Starting " + getApplicationName() + "...\n--\n");
-
+                
                 try {
-                    Cache.initialize(userDir + File.separator + "var" + File.separator + "cache");
+//                    Cache.initialize(userDir + File.separator + "var" + File.separator + "cache");
                     
                     AbstractApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
 
