@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Properties;
 
+import no.freecode.trumpeter.rt.Cache;
 import no.freecode.trumpeter.xmpp.XmppManager;
 
 import org.apache.commons.cli.CommandLine;
@@ -42,6 +43,8 @@ public class App {
 
     @SuppressWarnings("unchecked")
     public static void main(String[] args) throws InterruptedException {
+        
+        String userDir = System.getProperty("user.dir");  // current folder
 
         Daemon daemon = new Daemon();
         if (daemon.isDaemonized()) {
@@ -100,7 +103,7 @@ public class App {
             } else {
                 if (leftoverArgs.contains("start")) {
                     File pidFile = new File(PID_FILE);
-                    
+
                     if (pidFile.exists()) {
                         // TODO: check the PID, and if it's actually running, print out an error message and exit.
 //                        printerr("It seems like trumpeter is already running.");
@@ -183,6 +186,8 @@ public class App {
                 logger.info("Starting " + getApplicationName() + "...\n--\n");
 
                 try {
+                    Cache.initialize(userDir + File.separator + "var" + File.separator + "cache");
+                    
                     AbstractApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
 
                     // Make sure the application runs the @Destroy methods when exiting.
@@ -214,6 +219,9 @@ public class App {
 
                 } catch (NestedRuntimeException e) {
                     logger.error("Error: " + e.getMostSpecificCause().getMessage());
+
+                } catch (Exception e) {
+                    logger.error("Error: " + e.getMessage());
                 }
             }
 

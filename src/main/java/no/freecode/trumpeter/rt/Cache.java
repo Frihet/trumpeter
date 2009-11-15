@@ -9,13 +9,16 @@
  */
 package no.freecode.trumpeter.rt;
 
+import java.io.IOException;
 import java.util.HashSet;
+import java.util.Properties;
 import java.util.Set;
 
 import no.freecode.trumpeter.Configuration;
 
 import org.apache.jcs.JCS;
 import org.apache.jcs.access.exception.CacheException;
+import org.apache.jcs.engine.control.CompositeCacheManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,7 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public abstract class Cache {
 
 	private static final Logger logger = Logger.getLogger(Cache.class);
-
+	
 	@Autowired
 	protected Configuration configuration;
 	
@@ -107,6 +110,31 @@ public abstract class Cache {
 	    this.cacheRegion = "rules-" + namespace + "-" + getCacheName();
 	}
 
+    /**
+     * Initialise the caching system, specifying a cache folder.
+     */
+	public static void initialize(String cacheDir) throws IOException {
+        CompositeCacheManager ccm = CompositeCacheManager.getUnconfiguredInstance();
+        
+        Properties p = new Properties();
+        p.load(ClassLoader.getSystemClassLoader().getResourceAsStream("cache.properties"));
+
+//        p.setProperty("jcs.default", "DC");
+//        p.setProperty("jcs.default.cacheattributes", "org.apache.jcs.engine.CompositeCacheAttributes");
+//        p.setProperty("jcs.default.cacheattributes.MaxObjects", "1000");
+//        p.setProperty("jcs.default.cacheattributes.MemoryCacheName", "org.apache.jcs.engine.memory.lru.LRUMemoryCache");
+//        p.setProperty("jcs.default.cacheattributes.DiskUsagePatternName", "UPDATE");
+
+//        p.setProperty("jcs.auxiliary.DC", "org.apache.jcs.auxiliary.disk.indexed.IndexedDiskCacheFactory");
+//        p.setProperty("jcs.auxiliary.DC.attributes", "org.apache.jcs.auxiliary.disk.indexed.IndexedDiskCacheAttributes");
+        p.setProperty("jcs.auxiliary.DC.attributes.DiskPath", cacheDir);
+//        p.setProperty("jcs.auxiliary.DC.attributes.MaxPurgatorySize", "10000");
+//        p.setProperty("jcs.auxiliary.DC.attributes.MaxKeySize", "10000");
+//        p.setProperty("jcs.auxiliary.DC.attributes.OptimizeAtRemoveCount", "300000");
+//        p.setProperty("jcs.auxiliary.DC.attributes.OptimizeOnShutdown", "true");
+        ccm.configure(p);
+	}
+	
     private JCS getCache() {
         // Initialize the rule cache if it hasn't already been created.
         if (this.cache == null) {

@@ -175,6 +175,7 @@
             <groupId>org.apache.jcs</groupId>
             <artifactId>jcs</artifactId>
             <version>1.3</version>
+<!--            <version>1.3.3.5-RC</version>-->
         </dependency>
 
         <!-- Command line arguments parsing. -->
