@@ -270,7 +270,7 @@ public class App {
         }
         return output;
     }
-    
+
     private static void startJettyServer() throws Exception {
         Handler handler = new AbstractHandler() {
             public void handle(String target, HttpServletRequest request, HttpServletResponse response, int dispatch)

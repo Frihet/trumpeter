@@ -3,7 +3,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; version 3.
  *
- * Copyright: 2009 FreeCode AS
+ * Copyright: 2010 FreeCode AS
  * Project: trumpeter
  * Created: Jul 4, 2009
  */

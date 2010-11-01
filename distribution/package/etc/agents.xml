@@ -34,5 +34,10 @@
         -->
     </bean>
     
-    
+    <bean class="no.freecode.trumpeter.xmpp.HttpServerAgent">
+		<property name="alias" value="EspenBot" />
+		<property name="chatRoom" value="test@conference.example.com" />
+		<property name="tcpPort" value="8080" />
+		<property name="ajpPort" value="8009" />
+	</bean>
 </beans>

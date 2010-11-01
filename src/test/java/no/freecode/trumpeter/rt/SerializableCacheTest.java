@@ -1,5 +1,5 @@
 /**
- * Copyright: 2009 FreeCode AS
+ * Copyright: 2010 FreeCode AS
  * Project: trumpeter
  * Created: Jul 8, 2009
  *
