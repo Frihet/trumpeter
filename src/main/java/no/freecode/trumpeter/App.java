@@ -12,6 +12,10 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Properties;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import no.freecode.trumpeter.xmpp.XmppManager;
 
 import org.apache.commons.cli.CommandLine;
@@ -23,6 +27,10 @@ import org.apache.commons.cli.PosixParser;
 import org.apache.log4j.Logger;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
+import org.mortbay.jetty.Handler;
+import org.mortbay.jetty.Request;
+import org.mortbay.jetty.Server;
+import org.mortbay.jetty.handler.AbstractHandler;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -42,6 +50,18 @@ public class App {
 
     @SuppressWarnings("unchecked")
     public static void main(String[] args) throws InterruptedException {
+
+//        try {
+//            startJettyServer();
+//            Thread.sleep(1000 * 500);
+//
+//        } catch (Exception e2) {
+//            // TODO Auto-generated catch block
+//            e2.printStackTrace();
+//        }
+//
+//        System.exit(0);
+
 
 //        String userDir = System.getProperty("user.dir");  // current folder
         Properties systemProperties = new Properties((Properties) System.getProperties().clone());
@@ -185,10 +205,10 @@ public class App {
                 }
 
                 logger.info("Starting " + getApplicationName() + "...\n--\n");
-                
+
                 try {
 //                    Cache.initialize(userDir + File.separator + "var" + File.separator + "cache");
-                    
+
                     AbstractApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
 
                     // Make sure the application runs the @Destroy methods when exiting.
@@ -202,7 +222,7 @@ public class App {
                     try {
                         manager.connect();
                     } catch (XMPPException e) {
-                        throw new BeanCreationException("Error: " + e.getXMPPError());
+                        throw new BeanCreationException("Error: " + e.getXMPPError(), e);
 //                        throw new TrumpeterException("Unable to connect to XMPP server. " + e.getXMPPError());
 //                        throw new TrumpeterException("Unable to connect to XMPP server. " + e.getMessage());
                     }
@@ -217,6 +237,7 @@ public class App {
 
                 } catch (BeansException e) {
                     logger.error("Error: " + e.getMessage());
+                    logger.debug(getPrintableStackTrace(e.getCause()));
 
                 } catch (NestedRuntimeException e) {
                     logger.error("Error: " + e.getMostSpecificCause().getMessage());
@@ -240,5 +261,30 @@ public class App {
             logger.error("Error! Unable to load application.properties. (" + e.getMessage() + ").");
             return "APP NAME / VERSION";
         }
+    }
+    
+    private static String getPrintableStackTrace(Throwable t) {
+        String output = "";
+        for (StackTraceElement element : t.getStackTrace()) {
+            output += "\t" + element + "\n";
+        }
+        return output;
+    }
+    
+    private static void startJettyServer() throws Exception {
+        Handler handler = new AbstractHandler() {
+            public void handle(String target, HttpServletRequest request, HttpServletResponse response, int dispatch)
+                throws IOException, ServletException
+            {
+                response.setContentType("text/html");
+                response.setStatus(HttpServletResponse.SC_OK);
+                response.getWriter().println("<h1>Hello</h1>");
+                ((Request) request).setHandled(true);
+            }
+        };
+
+        Server server = new Server(8080);
+        server.setHandler(handler);
+        server.start();
     }
 }

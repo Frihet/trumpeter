@@ -51,6 +51,7 @@ public abstract class XmppChatAgent implements Agent {
         this.chat = new MultiUserChat(getConnection(), getChatRoom());
 
         // Join the chat!
+        logger.debug("Attempting to join chat '" + this.chat + "' with alias '" + getAlias() + "'");
         this.chat.join(getAlias());
 
         System.out.println("Agent '" + getAlias() + "' joined chatroom '" + getChatRoom() + "'.");

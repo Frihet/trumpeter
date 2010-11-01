@@ -27,11 +27,13 @@
         <appender-ref ref="file" />
     </category>
 
+<!-- Extra logging for JCS (Java Caching System).
     <category name="org.apache.jcs">
         <priority value="trace" />
         <appender-ref ref="console" />
         <appender-ref ref="file" />
     </category>
+ -->
 
     <root>
         <priority value="error" />

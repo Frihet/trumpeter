@@ -63,7 +63,6 @@ public class TicketQueryAgent extends XmppChatAgent {
         return rules;
     }
 
-    @Required
     public void setRules(Set<Rule> rules) {
         this.rules = rules;
     }
@@ -80,8 +79,7 @@ public class TicketQueryAgent extends XmppChatAgent {
         return rtConnection;
     }
 
-    @Autowired
-    @Required
+    @Autowired(required = true)
     public void setRtConnection(RtConnection rtConnection) {
         this.rtConnection = rtConnection;
     }
